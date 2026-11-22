@@ -653,7 +653,7 @@ a { color: inherit; }
 /* ==========================================================================
    RESTAURANTS PAGE: same parts, aimed at owners
    ========================================================================== */
-/* The pilot's three promises, set like a printed strip between double rules */
+/* The pilot's three promises, a small line under the hero button */
 .pilot-strip { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-top: var(--space-3); max-width: var(--measure-narrow); font-size: var(--text-small); font-weight: 700; } /* the reassurance line under the button, like the fine print under the diner form */
 .pilot-strip li { display: inline-flex; align-items: center; gap: var(--space-2); }
 .pilot-strip li + li::before { content: ""; width: 0.3em; height: 0.3em; border-radius: var(--radius-full); background: currentColor; }
@@ -676,7 +676,7 @@ a { color: inherit; }
 .faq > div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--space-3) var(--space-8); align-items: baseline; padding-block: var(--space-5); border-top: var(--rule-soft); }
 .faq dd { margin: 0; color: var(--color-text-muted); max-width: 36rem; text-wrap: pretty; }
 /* Contact band: the pilot terms beside the form */
-.pilot-terms { list-style: none; display: grid; gap: var(--space-4); max-width: 34rem; color: var(--color-on-band-muted); }
+.pilot-terms { list-style: none; display: grid; gap: var(--space-4); max-width: var(--measure-narrow); color: var(--color-on-band-muted); }
 .pilot-terms li { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--space-4); align-items: baseline; padding-top: var(--space-4); border-top: 1px dashed var(--color-on-band-muted); }
 .pilot-terms .num { font-weight: 800; font-stretch: var(--stretch-condensed); font-size: var(--text-h4); color: var(--color-on-band); }
 .lead { width: 100%; }
