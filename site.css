@@ -1,774 +1,686 @@
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Nibblr site styles. Tokens and components come from the Nibblr style guide
+   (nibblr-app/nibblr-design). Change tokens there first, then copy them here. */
+
+/* ==========================================================================
+   NIBBLR DESIGN TOKENS · v1 · 2026-11-21
+   Source of truth for every Nibblr page and the app. Build with these;
+   never add raw values. If a token is missing, add it here first.
+   ========================================================================== */
+
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url("fonts/archivo-var-latin.woff2") format("woff2");
+}
 
 :root {
-  --brand:    #b94c2d;
-  --brand-dk: #963b22;
-  --brand-lt: #e2b894;  /* brand on dark backgrounds */
-  --bg:       #faf6ed;
-  --bg-alt:   #f3eee4;
-  --dark:     #46382e;
-  --text:     #2d241e;
-  --muted:    #71645a;
-  --border:   #e6d9c8;
-  --rule:     #cfc0ac;
-  --serif:    Georgia, "Times New Roman", serif;
-  --sans:     Arial, sans-serif;
-  /* Content lines up with the 1050px column used by the steps and perks. */
-  --gutter:   max(6vw, 1.25rem);
+  color-scheme: light; /* the website is always paper and ink; dark tokens live in the style guide for the app */
+
+  /* ── Colour primitives (never use these directly in components) ── */
+  --tomato-500: #e0432a;   /* the brand: the punch card */
+  --tomato-600: #c0361d;   /* tomato as small text on light */
+  --tomato-300: #ff7a5c;   /* tomato as small text on dark */
+  --paper-50:   #ffffff;
+  --paper-100:  #f5f5f2;   /* newsprint white */
+  --paper-200:  #ebebe7;
+  --paper-300:  #d6d2c8;
+  --ink-900:    #161412;   /* menu ink */
+  --ink-800:    #1f1c19;
+  --ink-850:    #0e0d0c;
+  --ink-700:    #34302c;
+  --ink-600:    #3a3631;
+  --stone-600:  #55504a;
+  --stone-500:  #6e6861;
+  --stone-400:  #9a938a;
+  --stone-300:  #bab3a8;
+  --chalk-100:  #f3f1ea;
+  --green-700:  #1d6b43;
+  --green-300:  #5fc48c;
+  --crimson-700:#a8261b;
+  --crimson-300:#ff8a7a;
+
+  /* ── Semantic colour · light (default) ── */
+  --color-bg:            var(--paper-100);  /* page */
+  --color-surface:       var(--paper-50);   /* inputs, raised panels */
+  --color-sunk:          var(--paper-200);  /* disabled fields, code wells */
+  --color-text:          var(--ink-900);    /* 17.0:1 on bg */
+  --color-text-muted:    var(--stone-600);  /*  7.4:1 on bg */
+  --color-text-subtle:   var(--stone-500);  /*  5.1:1 on bg · placeholders, fine print */
+  --color-rule:          var(--ink-900);    /* ink rules, control borders */
+  --color-rule-soft:     var(--paper-300);  /* hairlines inside lists */
+  --color-brand:         var(--tomato-500); /* the card and one headline phrase only */
+  --color-brand-text:    var(--tomato-600); /*  5.1:1 on bg · small tomato text */
+  --color-on-brand:      var(--paper-50);   /*  4.2:1 · LARGE text only (≥24px, or ≥19px bold) */
+  --color-action:        var(--ink-900);    /* primary button fill */
+  --color-action-hover:  var(--ink-700);
+  --color-on-action:     var(--paper-100);
+  --color-band:          var(--ink-900);    /* ink band sections */
+  --color-on-band:       var(--paper-100);
+  --color-on-band-muted: var(--stone-300);
+  --color-success:       var(--green-700);
+  --color-danger:        var(--crimson-700);
+  --color-focus:         var(--tomato-500); /* 3.9:1 on bg, meets 3:1 for focus rings */
+  --punch-filled:        var(--paper-100);         /* an earned punch (same in dark mode) */
+  --punch-empty:         rgb(255 255 255 / 0.2);   /* an open slot: a soft tint, no outline */
+  --color-device:        var(--ink-900);       /* the flat bezel around app screenshots */
+  --device-bezel:        6px;
+  --color-on-brand-rule: rgb(255 255 255 / 0.35);  /* the rule above the card's footer line */
+  --color-band-accent:   var(--tomato-300);        /* ticks and accents on the ink band */
+  --color-band-action-hover: var(--paper-50);      /* primary button hover on the ink band */
+  --shadow-card: 0 1.5rem 2.75rem -1.25rem rgb(22 20 18 / 0.5), 0 0.25rem 0.5rem -0.25rem rgb(22 20 18 / 0.25);
+
+  /* ── Type ── */
+  --font-sans: "Archivo", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-code: ui-monospace, "SF Mono", Menlo, monospace;  /* documentation only: token names */
+  --stretch-condensed: 68%;   /* headlines, menu caps */
+  --stretch-semi:      86%;   /* menu items, buttons */
+  --stretch-normal:    100%;  /* body */
+  --stretch-wide:      125%;  /* wordmark only */
+
+  --text-display: clamp(2.5rem, 1.2rem + 5.6vw, 6rem);     /* hero headline */
+  --text-h1:      clamp(2.5rem, 1.7rem + 3.2vw, 4.25rem);   /* page title */
+  --text-h2:      clamp(1.875rem, 1.5rem + 1.4vw, 2.625rem); /* section: sentence case, semi-condensed */
+  --text-h3:      1.5rem;                                     /* group, card title */
+  --text-h4:      1.125rem;                                   /* label-weight heading */
+  --text-menu:    1.375rem;                                   /* reward rows, step titles */
+  --text-lead:    clamp(1.125rem, 1.05rem + 0.35vw, 1.3125rem);
+  --text-body:    1.0625rem;  /* 17px */
+  --text-small:   0.9375rem;  /* 15px */
+  --text-fine:    0.8125rem;  /* 13px */
+  --text-wordmark:   1.75rem;                               /* nav wordmark */
+  --text-card-title: clamp(var(--text-card), 6.4cqi, 1.875rem); /* "Your punch card": scales with the card itself, never below 19px */
+  --text-card:       1.1875rem;  /* 19px bold: the smallest text allowed on tomato */
+  --text-num-sm:  1.5rem;   /* compact card count */
+  --text-num-md:  1.75rem;  /* menu prices */
+  --text-num-lg:  2.25rem;  /* card count */
+  --text-num-xl:  3.5rem;   /* step numbers */
+
+  --leading-display: 0.88;
+  --leading-heading: 0.95;
+  --leading-snug:    1.2;
+  --leading-body:    1.6;
+  --leading-tight:   1.1;   /* card title */
+  --leading-ui:      1.3;   /* label-weight headings */
+  --leading-small:   1.5;   /* lead and small text */
+  --leading-fine:    1.45;  /* fine print, tags */
+  --leading-numeral: 0.82;  /* step numbers */
+
+  --tracking-display: -0.01em;
+  --tracking-wordmark:-0.02em;
+
+  /* ── Space (4px base) ── */
+  --space-1: 0.25rem;  /*   4 */
+  --space-2: 0.5rem;   /*   8 */
+  --space-3: 0.75rem;  /*  12 */
+  --space-4: 1rem;     /*  16 */
+  --space-5: 1.5rem;   /*  24 */
+  --space-6: 2rem;     /*  32 */
+  --space-7: 3rem;     /*  48 */
+  --space-8: 4rem;     /*  64 */
+  --space-9: 6rem;     /*  96 */
+  --space-10: 8rem;    /* 128 */
+  --space-section: clamp(3.5rem, 2.4rem + 4vw, 5.5rem); /* tightened 2026-11-22 */
+  --gutter:        clamp(1.25rem, 0.5rem + 3.5vw, 4.5rem);
+  --page-max:      75rem;   /* 1200 */
+  --measure:       66ch;
+  --measure-narrow: 34rem;  /* hero sub-line and sign-up form */
+
+  /* ── Shape ── */
+  --radius-0:    0;         /* controls, panels, menus: printed edges */
+  --radius-card: 0.875rem;  /* the punch card (a real card has round corners) */
+  --radius-card-sm: 0.625rem; /* the compact punch card */
+  --radius-full: 999px;     /* punches */
+  --radius-device: 2rem;    /* app screenshots: a phone screen's corners */
+  --border-control: 2px solid var(--color-rule);
+  --border-panel:   3px solid var(--color-rule);
+  --rule-double:    4px double var(--color-rule);
+  --rule-soft:      1px solid var(--color-rule-soft);
+  --leader:         3px dotted var(--color-rule);
+  --rule-perforation: 2px dashed var(--color-rule); /* order slip tear line */
+  --border-tag:     1.5px solid currentColor;
+  --focus-ring:     3px solid var(--color-focus);
+  --focus-offset:   3px;   /* 2px on fields */
+  --underline:      3px;   /* link underline thickness */
+  --underline-offset: 0.28em;
+
+  /* ── Punch card ── */
+  --card-max:         34rem;
+  --card-max-compact: 18rem;
+  --card-max-phone:   20rem;  /* hero and closing cards on phones: room for the footer line at 19px */
+  --card-pad:         clamp(1.25rem, 0.9rem + 1.6vw, 2rem);
+  --card-pad-compact: var(--space-4);
+  --punch-gap:        clamp(0.6rem, 0.35rem + 1vw, 1.1rem);
+  --punch-gap-compact: var(--space-2);
+  --card-tilt:        -3deg;  /* hero only */
+
+  /* ── Receipt ── */
+  --receipt-max:    24rem;
+  --receipt-tilt:   2deg;     /* leans the other way from the card */
+  --receipt-tooth:  16px;     /* width of one tear in the bottom edge */
+  --shadow-receipt: 0 1.25rem 1.5rem rgb(22 20 18 / 0.18); /* drop-shadow, so it follows the torn edge */
+  --gap-receipt-line:  140ms;  /* feed time per printed line: a steady rhythm */
+  --dur-receipt-eject: 120ms;  /* the last bit of paper comes out a touch quicker */
+  --dur-receipt-set:   420ms;  /* torn off and set down at its tilt */
+  --delay-receipt:     150ms;  /* once it's in view */
+  --shadow-receipt-printing: 0 0.5rem 0.75rem rgb(22 20 18 / 0.10); /* still in the printer: a shallow shadow */
+
+  /* ── Icons ── */
+  --icon-inline: 1.1em;    /* inside buttons and messages */
+  --icon-md:     1.375rem; /* list ticks */
+  --icon-lg:     1.5rem;   /* inside the success disc */
+  --tick-disc:   2.75rem;  /* success disc */
+
+  /* ── Controls ── */
+  --control-h:    3.25rem;  /* 52px */
+  --control-h-sm: 2.5rem;   /* 40px */
+  --control-px:   1.5rem;
+
+  /* ── Motion ── */
+  --ease-out:   cubic-bezier(0.16, 1, 0.3, 1);   /* exponential out */
+  --ease-stamp: var(--ease-out);                 /* its own name so the stamp can be tuned alone */
+  --dur-fast:   140ms;
+  --dur-base:   220ms;
+  --dur-stamp:  420ms;
+  /* The showcase stamp mirrors the app's punch moment (mobile/lib/constants/punch_animation_constants.dart) */
+  --dur-stamp-showcase:   1500ms; /* stampTotal */
+  --delay-stamp-showcase: 700ms;  /* the app's 500ms beat, plus time for the page to settle */
+  --stamp-impact:         0.6;    /* impactAt (900ms) as a fraction of the stamp: count and footer update here */
+  --dur-count-roll:       350ms;  /* countUpDuration */
+  --dur-footer-crossfade: 360ms;  /* footerCrossfade: out over the first half, in over the second */
+  --dur-stamp-reduced:    400ms;  /* reducedStampFade */
+  --dur-footer-wait:      500ms;  /* the footer waits for presses to pause before it changes */
+  --punch-next:           rgb(255 255 255 / 0.4); /* the bright peak of the pending glow */
+  --dur-punch-pending:    1.6s;   /* a waiting punch gently pulses, as on the tag tap page (backend/static/tap.html) */
+  --punch-pending-cycles: 3;      /* after the first tap, about 5 seconds, then it settles; before it, the glow repeats until tapped */
+  --ease-in-cubic:  cubic-bezier(0.32, 0, 0.67, 0);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --opacity-disabled: 0.45;
+  --opacity-busy:     0.8;
 }
 
-html { scroll-behavior: smooth; }
 
-/* Keep a lone word off the last line. On narrow screens, short centered text
-   and headings get lines of even length too; on wide screens that would pull
-   the text in from the edges. */
-h1, h2, h3, p, figcaption { text-wrap: pretty; }
-
-@media (max-width: 860px) {
-  h1, h2, h3, .hero p, .page-hero p, .waitlist p, .closing p, .contact p, figcaption { text-wrap: balance; }
-}
-
+/* ==========================================================================
+   BASE + COMPONENTS (all values come from the tokens above)
+   ========================================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 body {
-  font-family: var(--sans);
-  background: var(--bg);
-  color: var(--text);
-  line-height: 1.6;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-stretch: var(--stretch-normal);
+  background: var(--color-bg);
+  color: var(--color-text);
+  caret-color: var(--color-brand);
+  -webkit-font-smoothing: antialiased;
+  scrollbar-color: var(--color-text-subtle) var(--color-bg);
 }
-
-/* ── Nav ─────────────────────────────────────────── */
-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--gutter);
-  height: 70px;
-  background: rgba(250, 246, 237, 0.94);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid var(--border);
-}
-
-.nav-logo {
-  font-family: var(--serif);
-  font-size: 1.6rem;
-  font-weight: 700;
-  letter-spacing: -0.06em;
-  color: var(--text);
-  text-decoration: none;
-}
-
-.nav-cta {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text);
-  text-decoration: none;
-  border-bottom: 1px solid var(--brand);
-  padding: 0.35rem 0;
-  transition: color 0.15s;
-}
-.nav-cta:hover { color: var(--brand); }
-
-/* ── Shared type ─────────────────────────────────── */
-.hero-badge, .section-label {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--brand);
-}
-
-.hero-badge { display: inline-block; margin-bottom: 1.5rem; }
-
-.section-label { text-align: center; margin-bottom: 0.8rem; }
-
-.section-title {
-  text-align: center;
-  font: 500 clamp(2rem, 4vw, 3rem)/1.05 var(--serif);
-  letter-spacing: -0.04em;
-  margin-bottom: 2.7rem;
-}
-
-.btn-primary {
-  display: inline-block;
-  background: var(--brand);
-  color: #fff;
-  font: inherit;
-  font-size: 0.95rem;
-  font-weight: 600;
-  padding: 0.75rem 1.75rem;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-decoration: none;
-  transition: background 0.15s, transform 0.1s;
-}
-.btn-primary:hover { background: var(--brand-dk); transform: translateY(-1px); }
-.btn-primary:disabled { opacity: 0.6; cursor: default; transform: none; }
-
-/* ── Hero ─────────────────────────────────────────── */
-/* Pitch on the left, waitlist form on the right; stacked on narrow screens. */
-.hero {
-  max-width: 1220px;
-  min-height: 620px;
-  margin: 0 auto;
-  padding: 4.5rem var(--gutter) 4rem;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(340px, 0.82fr);
-  grid-template-areas: "copy form" "owner form";
-  column-gap: clamp(2rem, 5vw, 5rem);
-  row-gap: 1rem;
-  align-items: center;
-}
-
-.hero-copy { grid-area: copy; align-self: end; }
-
-.hero h1 {
-  max-width: 630px;
-  margin: 1.15rem 0 1.1rem;
-  font-family: var(--serif);
-  font-size: clamp(2.8rem, 5vw, 4.4rem);
-  font-weight: 500;
-  line-height: 0.99;
-  letter-spacing: -0.055em;
-}
-
-.hero h1 span { color: var(--brand); font-style: italic; }
-
-.hero p {
-  font-size: 1.15rem;
-  color: var(--muted);
-  max-width: 540px;
-  margin: 0 0 1.5rem;
-}
-
-.hero-copy > p {
-  max-width: 490px;
-  margin: 0;
-  font-size: 1.05rem;
-  line-height: 1.7;
-}
-
-/* ── Waitlist ─────────────────────────────────────── */
-.waitlist {
-  width: 100%;
-  max-width: 440px;
-  grid-area: form;
-  align-self: center;
-  justify-self: end;
-  padding: 1.35rem 1.4rem;
-  background: rgba(255, 255, 255, 0.55);
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  box-shadow: 0 10px 30px rgba(74, 49, 28, 0.05);
-  text-align: left;
-  /* Clear the sticky nav when a "Join the waitlist" link scrolls here. */
-  scroll-margin-top: 90px;
-}
-
-.waitlist h2 {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-}
-
-.field { margin-bottom: 0.9rem; }
-
-.field label {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: 0.3rem;
-}
-
-.field input, .share-link input {
-  width: 100%;
-  font: inherit;
-  font-size: 1rem;
-  color: var(--text);
-  background: #fffdf9;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.6rem 0.75rem;
-}
-
-.field input:focus {
-  outline: 2px solid var(--brand);
-  outline-offset: -1px;
-  background: #fff;
-}
-
-.waitlist .btn-primary { width: 100%; margin-top: 0.25rem; }
-
-.waitlist .fine-print {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin: 0.75rem 0 0;
-  text-align: center;
-}
-
-.waitlist .fine-print a { color: var(--muted); }
-
-.waitlist .step-lead {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin: -0.5rem 0 1rem;
-}
-
-/* Once someone has joined, the card picks up the brand color and shows a check mark. */
-.waitlist.done {
-  border-color: var(--brand);
-  box-shadow: 0 12px 32px rgba(185, 76, 45, 0.18);
-  animation: pop 0.35s ease-out;
-}
-
-@keyframes pop {
-  0% { transform: scale(0.97); }
-  60% { transform: scale(1.015); }
-  100% { transform: scale(1); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .waitlist.done { animation: none; }
-}
-
-.check {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: var(--brand);
-  color: #fff;
-  font-size: 1.4rem;
-  font-weight: 700;
-  line-height: 44px;
-  text-align: center;
-  margin-bottom: 0.75rem;
-}
-
-.joined .check { margin: 0 auto 0.75rem; }
-
-.link-button {
-  font: inherit;
-  color: var(--muted);
-  background: none;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
-.form-error {
-  font-size: 0.85rem;
-  color: #b42318;
-  margin-top: 0.75rem;
-  text-align: center;
-}
-
-.joined { text-align: center; }
-
-.joined p {
-  font-size: 0.95rem;
-  color: var(--muted);
-  margin: 0 0 1rem;
-}
-
-.share-link {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.share-link input { flex: 1; min-width: 0; width: auto; font-size: 0.9rem; }
-
-.share-link .btn-primary { width: auto; margin: 0; padding: 0.6rem 1.1rem; }
-
-.hero .owner-line {
-  grid-area: owner;
-  align-self: start;
-  font-size: 0.84rem;
-  margin: 0;
-}
-
-.owner-line a { color: var(--brand); font-weight: 600; }
-
-@media (max-width: 860px) {
-  .hero {
-    min-height: 0;
-    grid-template-columns: 1fr;
-    grid-template-areas: "copy" "form" "owner";
-    row-gap: 1.5rem;
-    padding-top: 3.5rem;
-  }
-  .waitlist { justify-self: stretch; }
-}
-
+::selection { background: var(--color-text); color: var(--color-bg); }
+h1, h2, h3, h4, p, li, figcaption { text-wrap: pretty; }
+h1, h2 { text-wrap: balance; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+:focus-visible { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+.num { font-variant-numeric: tabular-nums lining-nums; }
+.visually-hidden { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 [hidden] { display: none !important; }
 
-/* ── How it works ─────────────────────────────────── */
-.how {
-  background: var(--bg-alt);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 5.5rem var(--gutter);
-}
-
-/* On the restaurants page the perks above already use the alternate background. */
-.restaurant-page .how { background: var(--bg); }
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: clamp(1.2rem, 3vw, 3rem);
-  max-width: 1050px;
-  margin: 0 auto;
-}
-
-.step {
-  padding: 1.25rem 0 0;
-  border-top: 1px solid var(--rule);
-}
-
-/* Step numbers in place of illustrations until the final art is ready. */
-.step-number {
-  margin: 0 0 1.1rem;
-  color: var(--brand);
-  font: italic 2rem/1 var(--serif);
-}
-
-.step h3 {
-  font-family: var(--serif);
-  font-size: 1.3rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
-}
-
-.step p {
-  max-width: 300px;
-  font-size: 0.92rem;
-  color: var(--muted);
-}
-
-.restaurant-page .step h3 { font: 500 1.35rem/1.2 var(--serif); }
-.restaurant-page .step p { max-width: none; font-size: 0.94rem; line-height: 1.65; }
-
-/* ── For restaurants ────────────────────────────── */
-.restaurants {
-  background: var(--bg-alt);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 5rem var(--gutter);
-}
-
-.perks {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(1.5rem, 4vw, 4rem);
-  row-gap: 0.25rem;
-  max-width: 1050px;
-  margin: 0 auto;
-}
-
-.perk {
-  padding: 1.4rem 0 1.6rem;
-  border-top: 1px solid var(--rule);
-}
-
-.perk-note {
-  margin-bottom: 0.75rem;
-  color: var(--brand);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-}
-
-.perk h3 {
-  font: 500 1.35rem/1.2 var(--serif);
-  margin-bottom: 0.5rem;
-}
-
-.perk p {
-  font-size: 0.94rem;
-  line-height: 1.65;
-  color: var(--muted);
-}
-
-/* ── Screenshots ─────────────────────────────────── */
-.screenshots {
-  padding: 5.5rem var(--gutter);
-  text-align: center;
-}
-
-.screenshot-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 2.5rem;
-  margin-top: 3rem;
-}
-
-.phone-frame {
-  width: 240px;
-  flex-shrink: 0;
-}
-
-.phone-frame img {
-  width: 100%;
-  height: auto;
-  border-radius: 36px;
-  border: 5px solid #342921;
-  box-shadow: 0 18px 42px rgba(45, 36, 30, 0.15);
-  display: block;
-}
-
-.phone-frame figcaption {
-  font-size: 0.9rem;
-  color: var(--muted);
-  margin-top: 1rem;
-}
-
-.screenshot-note {
-  font-size: 0.8rem;
-  color: var(--muted);
-  margin-top: 2rem;
-}
-
-/* ── Contact ─────────────────────────────────────── */
-.contact {
-  background: var(--dark);
-  color: #fff;
-  padding: 5rem 1.25rem;
-  text-align: center;
-}
-
-.contact .section-label { color: var(--brand-lt); }
-
-.contact h2 {
-  font: 500 clamp(2rem, 4vw, 3rem)/1.05 var(--serif);
-  letter-spacing: -0.04em;
-  margin-bottom: 1rem;
-}
-
-.contact p {
-  font-size: 1rem;
-  color: #b0a89e;
-  max-width: 480px;
-  margin: 0 auto 2rem;
-}
-
-/* The button and the plain address, as one centered group. */
-.contact-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.contact a.email-link {
-  display: inline-block;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #fff;
-  background: var(--brand);
-  padding: 0.75rem 2rem;
-  border-radius: 4px;
-  text-decoration: none;
-  transition: background 0.15s, transform 0.1s;
-}
-.contact a.email-link:hover { background: var(--brand-dk); transform: translateY(-1px); }
-
-/* The address in plain text, for laptops with no mail app set up. */
-.contact .email-address { width: 100%; margin: 0; font-size: 0.9rem; }
-.contact .email-address a { color: var(--brand-lt); }
-
-/* ── Closing sign-up ─────────────────────────────── */
-.closing {
-  background: var(--dark);
-  color: #fff;
-  padding: 4.5rem 2rem;
-  text-align: center;
-}
-
-.closing h2 {
-  font: 500 clamp(2rem, 4vw, 3rem)/1.05 var(--serif);
-  letter-spacing: -0.04em;
-  margin-bottom: 0.75rem;
-}
-
-.closing p {
-  color: #b0a89e;
-  margin-bottom: 1.75rem;
-}
-
-/* ── Restaurants page hero ───────────────────────── */
-/* Side padding lines the text up with the 1050px column of the sections below. */
-.page-hero {
-  padding: 5.5rem max(var(--gutter), (100% - 1050px) / 2) 5rem;
-}
-
-.page-hero h1 {
-  max-width: 800px;
-  margin: 1rem 0 1.15rem;
-  font: 500 clamp(2.8rem, 5vw, 4.4rem)/1.02 var(--serif);
-  letter-spacing: -0.05em;
-}
-
-.page-hero h1 span { color: var(--brand); font-style: italic; }
-
-.page-hero p {
-  font-size: 1.05rem;
-  line-height: 1.7;
-  color: var(--muted);
-  max-width: 650px;
-  margin: 0 0 1.5rem;
-}
-
-/* ── Footer ──────────────────────────────────────── */
-footer {
-  text-align: center;
-  padding: 1.5rem 2rem;
-  font-size: 0.8rem;
-  color: var(--muted);
-  border-top: 1px solid var(--border);
-}
-
-footer a { color: var(--muted); }
-
-@media (max-width: 700px) {
-  .perks { grid-template-columns: 1fr; }
-  .how, .restaurants, .screenshots, .contact, .closing { padding: 3.5rem 1.25rem; }
-  .page-hero { padding: 3.5rem 1.25rem; }
-}
-
-@media (max-width: 500px) {
-  .hero { padding: 2.5rem 1rem 3rem; }
-  .hero h1 { font-size: clamp(2.8rem, 13vw, 4rem); }
-  .hero p { font-size: 1.05rem; }
-  .waitlist { padding: 1.25rem; }
-}
-
-
-/* ── Placeholder art ─────────────────────────────── */
-/* Used only by the *-art-preview.html files, until the final illustrations are ready. */
-.home-page .step-art {
-  min-height: 90px;
-  margin: 0 0 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .35rem;
-  border: 1px dashed #ad9276;
-  border-radius: 48% 52% 42% 58%;
-  color: #625348;
-  transform: rotate(-3deg);
-}
-.home-page .step-art span { font-size: .62rem; font-weight: 700; letter-spacing: .1em; }
-.home-page .step-art small { font-size: .68rem; }
-.home-page .step-phone { background: #e1e8e7; }
-.home-page .step-food { background: #f0e1c7; transform: rotate(3deg); }
-.home-page .step-treat { background: #eed9cf; transform: rotate(-2deg); }
-
-/* Neighborhood illustration between the steps and product screenshots. */
-.home-page .neighborhood {
-  padding: 3.5rem var(--gutter);
-  background: #e9e3d7;
-}
-.home-page .neighborhood-inner {
-  width: min(100%, 1000px);
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: minmax(230px, .72fr) minmax(0, 1fr);
-  align-items: center;
-  gap: clamp(2rem, 6vw, 5rem);
-}
-.home-page .storefront-art {
-  min-height: 190px;
-  padding: 1.1rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: .55rem;
-  color: #66574a;
-  background: #f2e2cd;
-  border: 1px dashed #b19a7f;
-  border-radius: 49% 42% 8% 8% / 9% 8% 6% 6%;
-  transform: rotate(-1deg);
-}
-.home-page .storefront-label,
-.home-page .storefront-caption {
-  position: relative;
-  z-index: 1;
-  font: 700 .58rem var(--sans);
-  letter-spacing: .12em;
+/* ── Type styles ── */
+/* Condensed caps are the page's one shout: the hero (display) and page titles (h1) only. */
+.t-display, .t-h1 {
+  font-weight: 800;
+  font-stretch: var(--stretch-condensed);
   text-transform: uppercase;
+  letter-spacing: var(--tracking-display);
 }
-.home-page .storefront-caption { font-weight: 400; letter-spacing: .02em; text-transform: none; }
-.home-page .storefront-shape {
-  width: 126px;
-  height: 76px;
-  position: relative;
-  border: 1px solid #ad755b;
-  background: #d7a184;
-  box-shadow: inset 0 -9px #b97b60;
+.t-display { font-size: var(--text-display); line-height: var(--leading-display); }
+.t-h1      { font-size: var(--text-h1); line-height: var(--leading-heading); }
+.t-display em, .t-h1 em { font-style: normal; color: var(--color-brand); }
+/* Section headings speak at a normal volume: sentence case, semi-condensed, ink only. */
+.t-h2 {
+  font-size: var(--text-h2);
+  line-height: var(--leading-tight);
+  font-weight: 800;
+  font-stretch: var(--stretch-semi);
+  letter-spacing: var(--tracking-display);
 }
-.home-page .storefront-awning {
-  position: absolute;
-  left: -9px;
-  right: -9px;
-  top: 25px;
-  height: 12px;
-  border: 1px dashed #9c6049;
-  background: #e6c09d;
-}
-.home-page .storefront-windows {
-  position: absolute;
-  left: 9px;
-  right: 9px;
-  top: 7px;
-  height: 16px;
-  border: 1px solid rgba(99, 72, 55, .55);
-  background: #d9e3dc;
-}
-.home-page .storefront-fire-escape {
-  position: absolute;
-  width: 28px;
-  height: 43px;
-  right: -18px;
-  top: -9px;
-  border-top: 2px solid #66574a;
-  border-right: 2px solid #66574a;
-  border-bottom: 2px solid #66574a;
-}
-.home-page .storefront-fire-escape::before,
-.home-page .storefront-fire-escape::after {
-  content: "";
-  position: absolute;
-  left: -7px;
-  width: 34px;
-  border-top: 1px solid #66574a;
-}
-.home-page .storefront-fire-escape::before { top: 13px; }
-.home-page .storefront-fire-escape::after { top: 28px; }
-.home-page .neighborhood-copy .section-label { text-align: left; }
-.home-page .neighborhood-copy h2 {
-  max-width: 540px;
-  margin: .65rem 0 .8rem;
-  font: 500 clamp(1.8rem, 3.6vw, 2.7rem)/1.08 var(--serif);
-  letter-spacing: -.04em;
-}
-.home-page .neighborhood-copy > p:last-child {
-  max-width: 540px;
-  margin: 0;
-  color: var(--muted);
-  font: 1rem/1.65 var(--sans);
-}
-@media (max-width: 650px) {
-  .home-page .neighborhood { padding: 3rem 1.25rem; }
-  .home-page .neighborhood-inner { grid-template-columns: 1fr; gap: 1.8rem; }
-  .home-page .storefront-art { width: min(100%, 360px); justify-self: center; }
+.t-h2 em { font-style: normal; }
+.t-h3 { font-size: var(--text-h3); line-height: var(--leading-snug); font-weight: 750; font-stretch: var(--stretch-semi); }
+.t-h4 { font-size: var(--text-h4); line-height: var(--leading-ui); font-weight: 700; }
+.t-menu { font-size: var(--text-menu); line-height: var(--leading-snug); font-weight: 700; font-stretch: var(--stretch-semi); }
+.t-lead { font-size: var(--text-lead); line-height: var(--leading-small); }
+.t-body { font-size: var(--text-body); }
+.t-small { font-size: var(--text-small); line-height: var(--leading-small); }
+.t-fine { font-size: var(--text-fine); line-height: var(--leading-fine); color: var(--color-text-subtle); }
+.muted { color: var(--color-text-muted); }
+
+/* ── Wordmark ── */
+.wordmark {
+  font-weight: 900;
+  font-stretch: var(--stretch-wide);
+  letter-spacing: var(--tracking-wordmark);
+  font-size: var(--text-wordmark);
+  line-height: 1;
+  text-decoration: none;
+  color: var(--color-text);
 }
 
-.restaurant-page .partner-step-art {
-  min-height: 90px;
-  margin-bottom: 1.25rem;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: .4rem;
-  color: #625348;
-  font-size: .62rem;
-  font-weight: 700;
-  letter-spacing: .1em;
+/* ── Links ── */
+.link {
+  color: var(--color-text);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--color-brand);
+  text-decoration-thickness: var(--underline);
+  text-underline-offset: var(--underline-offset);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
 }
-.restaurant-page .partner-step-art small {
-  display: inline-block;
-  padding: .65rem 1rem;
-  border: 1px dashed #ad9276;
-  border-radius: 48% 52% 42% 58%;
-  background: #e1e8e7;
-  font: italic .75rem var(--serif);
-  letter-spacing: 0;
-}
-.restaurant-page .step:nth-child(2) .partner-step-art small { background: #f0e1c7; }
-.restaurant-page .step:nth-child(3) .partner-step-art small { background: #eed9cf; }
+.link:hover { text-decoration-color: currentColor; }
 
-
-/* ── Restaurant interest form (dark contact section) ─ */
-.lead-form, .lead-done {
-  max-width: 420px;
-  margin: 0 auto 1.5rem;
-  text-align: left;
-}
-.lead-form .field label { color: #e9e1d6; }
-.lead-form .optional { font-weight: 400; color: #b0a89e; }
-.lead-form .field input {
-  width: 100%;
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--space-2);
+  min-height: var(--control-h);
+  padding: 0 var(--control-px);
   font: inherit;
-  font-size: 1rem;
-  color: var(--text);
-  background: #fffdf9;
-  border: 1px solid var(--border);
-  border-radius: 4px;
-  padding: 0.6rem 0.75rem;
+  font-size: var(--text-body);
+  font-weight: 750;
+  font-stretch: var(--stretch-semi);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: var(--radius-0);
+  border: var(--border-control);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out), transform var(--dur-fast) var(--ease-out);
 }
-.lead-form .field input:focus { outline: 2px solid var(--brand-lt); outline-offset: 1px; }
-.lead-form .btn-primary { width: 100%; margin-top: 0.3rem; }
-.lead-form .form-error { color: #f3c2b0; margin: 0.75rem 0 0; }
-.lead-done { text-align: center; }
-.lead-done h3 { font: 500 1.4rem/1.2 var(--serif); }
-.lead-form ~ .email-address, .lead-done ~ .email-address { margin: 0 auto; }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn-primary { background: var(--color-action); color: var(--color-on-action); border-color: var(--color-action); }
+.btn-primary:hover:not(:disabled) { background: var(--color-action-hover); border-color: var(--color-action-hover); }
+.btn-secondary { background: transparent; color: var(--color-text); border-color: var(--color-rule); }
+.btn-secondary:hover:not(:disabled) { background: var(--color-action); color: var(--color-on-action); }
+.btn-sm { min-height: var(--control-h-sm); padding: 0 var(--space-4); font-size: var(--text-small); }
+.btn:disabled { opacity: var(--opacity-disabled); cursor: not-allowed; }
+.btn[aria-busy="true"] { cursor: progress; opacity: var(--opacity-busy); }
+.btn svg { width: var(--icon-inline); height: var(--icon-inline); }
+/* On an ink band */
+.band .btn-primary { background: var(--color-on-band); color: var(--color-band); border-color: var(--color-on-band); }
+.band .btn-primary:hover { background: var(--color-band-action-hover); border-color: var(--color-band-action-hover); }
 
-/* Pilot terms above the restaurant interest form */
-.pilot-terms {
-  list-style: none;
-  max-width: 30rem;
-  margin: 1.5rem auto 2rem;
-  padding: 0;
-  text-align: left;
-  color: #e9e1d6;
-  font-size: 0.95rem;
-  line-height: 1.5;
+/* ── Fields ── */
+.field { display: grid; gap: var(--space-2); }
+.label { font-size: var(--text-small); font-weight: 700; }
+.label .optional { font-weight: 400; color: var(--color-text-muted); }
+.input {
+  width: 100%;
+  min-height: var(--control-h);
+  padding: 0 var(--space-4);
+  font: inherit;
+  font-size: var(--text-body);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: var(--border-control);
+  border-radius: var(--radius-0);
+  transition: outline-color var(--dur-fast) var(--ease-out);
 }
-.pilot-terms li { position: relative; padding-left: 1.6rem; margin-bottom: 0.7rem; }
-.pilot-terms li::before { content: "✓"; position: absolute; left: 0; color: var(--brand-lt); font-weight: 700; }
-.pilot-terms strong { color: #fff; }
-.nowrap { white-space: nowrap; }
+.input::placeholder { color: var(--color-text-subtle); opacity: 1; }
+.input:focus { outline: var(--focus-ring); outline-offset: 2px; }
+.input:disabled { background: var(--color-sunk); border-color: var(--color-rule-soft); color: var(--color-text-subtle); cursor: not-allowed; }
+.input[aria-invalid="true"] { border-color: var(--color-danger); box-shadow: inset 0 0 0 1px var(--color-danger); }
+.hint { font-size: var(--text-fine); color: var(--color-text-muted); }
+.error-msg { display: flex; gap: var(--space-2); align-items: flex-start; font-size: var(--text-small); font-weight: 600; color: var(--color-danger); }
+.error-msg svg { flex: none; width: var(--icon-inline); height: var(--icon-inline); margin-top: 0.15em; }
 
-/* Land "Talk to us" links below the sticky nav, not under it. */
-.contact { scroll-margin-top: 30px; }
-
-/* Form as a light card on the dark section, like the diners waitlist */
-.lead-form {
-  background: var(--bg);
-  border-radius: 5px;
-  padding: 1.35rem 1.4rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
-}
-.lead-form .field label { color: var(--text); }
-.lead-form .optional { color: var(--muted); }
-.lead-form .form-error { color: var(--brand-dk); }
-.lead-form .field input:focus { outline-color: var(--brand); }
-
-/* Wide screens: pitch on the left, form on the right, so it all fits in one view */
-@media (min-width: 900px) {
-  .contact {
-    display: grid;
-    grid-template-columns: minmax(0, 27rem) minmax(0, 420px);
-    column-gap: 4rem;
-    justify-content: center;
-    align-content: start;
-    text-align: left;
-  }
-  .contact > * { grid-column: 1; }
-  .contact > .section-label, .contact > h2, .contact > p, .contact > .pilot-terms { margin-left: 0; margin-right: 0; text-align: left; }
-  .contact > .pilot-terms { margin-top: 0.25rem; margin-bottom: 1.5rem; }
-  .contact > .lead-form, .contact > .lead-done { grid-column: 2; grid-row: 1 / span 6; align-self: center; margin: 0; width: 100%; }
+/* ── Order slip: one field + its button, joined like a tear-off slip ── */
+.slip { display: flex; }
+.slip .input { flex: 1; min-width: 0; border-right: var(--rule-perforation); }
+.slip .btn { border-left: 0; }
+.slip .btn { flex: none; }
+@media (max-width: 30rem) {
+  .slip { flex-direction: column; gap: var(--space-3); }
+  .slip .input { border-right: var(--border-control); }
+  .slip .btn { border-left: var(--border-control); }
 }
 
-/* Restaurants hero: keep the orange phrase on its own line on wider screens */
-@media (min-width: 700px) {
-  .restaurant-hero h1 span { display: block; }
+/* ── The punch card ── */
+.punch-card {
+  position: relative;
+  width: 100%;
+  max-width: var(--card-max);
+  padding: var(--card-pad);
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.punch-card { container-type: inline-size; }
+.punch-card.is-tilted { transform: rotate(var(--card-tilt)); }
+.pc-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-5); }
+.pc-title { white-space: nowrap; font-size: var(--text-card-title); font-weight: 800; font-stretch: var(--stretch-semi); line-height: var(--leading-tight); }
+.pc-count { font-size: var(--text-card); font-weight: 700; white-space: nowrap; }
+.pc-count b { font-size: var(--text-num-lg); font-weight: 800; font-stretch: var(--stretch-condensed); line-height: 1; margin-right: 0.15em; }
+.pc-grid { list-style: none; display: grid; grid-template-columns: repeat(5, 1fr); gap: var(--punch-gap); }
+.punch {
+  position: relative;
+  aspect-ratio: 1;
+  border-radius: var(--radius-full);
+  background: var(--punch-empty);
+}
+.punch.is-filled { background: var(--punch-filled); }
+.punch.is-new { animation: stamp var(--dur-stamp) var(--ease-stamp) both; }
+@keyframes stamp {
+  0%   { transform: scale(1.3) rotate(-6deg); opacity: 0.35; }
+  100% { transform: scale(1) rotate(0); opacity: 1; }
+}
+/* Showcase stamp (website hero), timed like the app: the hole waits, the stamp falls from 1.8x
+   (fading in), lands squashed at impact, then springs back; the card lifts, then presses. */
+.punch.is-new.is-showcase {
+  animation: stamp-showcase var(--dur-stamp-showcase) linear var(--delay-stamp-showcase) both;
+}
+@keyframes stamp-showcase {
+  0%     { background: var(--punch-empty); transform: none; opacity: 1; }
+  26.6%  { background: var(--punch-empty); transform: none; opacity: 1; }
+  26.7%  { background: var(--punch-filled); transform: scale(1.8); opacity: 0; animation-timing-function: var(--ease-in-cubic); }
+  60%    { background: var(--punch-filled); transform: scale(0.86); opacity: 1; animation-timing-function: var(--ease-out-cubic); }
+  83.3%  { background: var(--punch-filled); transform: scale(1); opacity: 1; }
+  100%   { background: var(--punch-filled); transform: scale(1); opacity: 1; }
+}
+.punch-card.is-tilted:has(.is-showcase) {
+  animation: card-press var(--dur-stamp-showcase) var(--ease-out-cubic) var(--delay-stamp-showcase) both;
+}
+@keyframes card-press {
+  0%    { transform: rotate(var(--card-tilt)); }
+  55%   { transform: perspective(60rem) rotate(var(--card-tilt)) rotateX(-5deg) scale(1.025); }
+  62%   { transform: perspective(60rem) rotate(var(--card-tilt)) scale(0.985); }
+  83.3%, 100% { transform: rotate(var(--card-tilt)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .punch-card.is-tilted:has(.is-showcase) { animation: none; }
+  .punch.is-new.is-showcase { animation: stamp-reduced var(--dur-stamp-reduced) var(--ease-out) var(--delay-stamp-showcase) both; }
+}
+@keyframes stamp-reduced {
+  from { background: var(--punch-filled); opacity: 0; }
+  to   { background: var(--punch-filled); opacity: 1; }
+}
+
+/* The stampable hero card: the whole card is one button that punches the next hole, in order */
+.card-button { display: block; width: 100%; padding: 0; border: 0; background: none; font: inherit; color: inherit; text-align: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.card-button:disabled { cursor: default; }
+.card-button > .punch-card { display: block; }
+.card-button .pc-foot { display: flex; }
+.card-button .pc-head { display: flex; }
+.card-button .pc-grid { display: grid; }
+.card-button .punch { display: block; transition: background-color var(--dur-fast) var(--ease-out); }
+.card-button:focus-visible { outline: none; }
+.card-button:focus-visible > .punch-card { outline: var(--focus-ring); outline-offset: var(--focus-offset); }
+/* "Your next punch is waiting": the next hole glows (the same pending signal as the tag tap page)
+   for a few cycles after the opening stamp, after each tap, and whenever the card is hovered or
+   focused, then rests like any open hole. Each glow starts and ends at rest, so nothing snaps. */
+.card-button:not(:disabled) .punch.is-next.is-inviting { animation: punch-pending var(--dur-punch-pending) ease-in-out var(--punch-pending-cycles); }
+.card-button.is-untapped:not(:disabled) .punch.is-next.is-inviting { animation-iteration-count: infinite; } /* until the first tap */
+@keyframes punch-pending { 0%, 100% { background: var(--punch-empty); } 50% { background: var(--punch-next); } }
+@media (prefers-reduced-motion: reduce) { .card-button .punch.is-next.is-inviting { animation: none; } }
+.punch.is-tapped { animation: stamp var(--dur-stamp) var(--ease-stamp) both; }
+@media (prefers-reduced-motion: reduce) { .punch.is-tapped { animation: none; } }
+
+/* The total rolls up at impact: the old number slides up and out as the new one comes in from below */
+.roll { display: inline-grid; overflow: hidden; vertical-align: bottom; }
+.roll > span { grid-area: 1 / 1; }
+.roll-out { animation: roll-out var(--dur-count-roll) var(--ease-in-cubic) both; }
+.roll-in  { animation: roll-in  var(--dur-count-roll) var(--ease-out-cubic) both; }
+@keyframes roll-out { to   { transform: translateY(-80%); opacity: 0; } }
+@keyframes roll-in  { from { transform: translateY(80%);  opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .roll-out { animation-name: fade-out; } .roll-in { animation-name: fade-in; }
+}
+@keyframes fade-out { to { opacity: 0; } }
+@keyframes fade-in  { from { opacity: 0; } }
+[data-foot] { transition: opacity calc(var(--dur-footer-crossfade) / 2) var(--ease-out); }
+@media (prefers-reduced-motion: reduce) { .punch.is-new { animation: none; } }
+.pc-foot {
+  display: flex; justify-content: space-between; gap: var(--space-4); align-items: baseline;
+  margin-top: var(--space-5); padding-top: var(--space-4);
+  border-top: 2px solid var(--color-on-brand-rule);
+  font-size: var(--text-card); font-weight: 700;
+}
+.punch-card.is-compact { --card-pad: var(--card-pad-compact); --punch-gap: var(--punch-gap-compact); max-width: var(--card-max-compact); border-radius: var(--radius-card-sm); }
+.punch-card.is-compact .pc-head { margin-bottom: var(--space-3); }
+.punch-card.is-compact .pc-title { font-size: var(--text-card); }
+.punch-card.is-compact .pc-count b { font-size: var(--text-num-sm); }
+
+/* ── Menu: rewards priced in punches ── */
+.menu { border-top: var(--border-panel); border-bottom: var(--border-panel); padding: var(--space-5) 0; }
+.menu-title { margin-bottom: var(--space-4); }
+.menu-list { list-style: none; display: grid; gap: var(--space-3); }
+.menu-row { display: flex; align-items: baseline; gap: var(--space-3); }
+.menu-row .leader { flex: 1; border-bottom: var(--leader); transform: translateY(-0.28em); min-width: var(--space-5); }
+.menu-row .price { font-weight: 800; font-stretch: var(--stretch-condensed); font-size: var(--text-num-md); line-height: 1; }
+.menu-row .price small { font-size: var(--text-small); font-weight: 600; font-stretch: var(--stretch-normal); margin-left: 0.25em; color: var(--color-text-muted); }
+.menu-note { margin-top: var(--space-4); font-size: var(--text-small); color: var(--color-text-muted); }
+
+/* ── Receipt: what one diner did, like a slip from the till (one ink, amounts in a right column) ── */
+.receipt-object { width: 100%; max-width: var(--receipt-max); margin: 0; transform: rotate(var(--receipt-tilt)); filter: drop-shadow(var(--shadow-receipt)); }
+.receipt {
+  padding: var(--space-6) var(--space-5) var(--space-7);
+  background: var(--color-surface);
+  color: var(--color-text);
+  /* the torn bottom edge */
+  -webkit-mask: radial-gradient(circle at 50% 100%, transparent calc(var(--receipt-tooth) * 0.375), #000 calc(var(--receipt-tooth) * 0.375 + 0.5px)) bottom / var(--receipt-tooth) calc(var(--receipt-tooth) * 0.75) repeat-x, linear-gradient(#000, #000) top / 100% calc(100% - var(--receipt-tooth) * 0.7) no-repeat;
+          mask: radial-gradient(circle at 50% 100%, transparent calc(var(--receipt-tooth) * 0.375), #000 calc(var(--receipt-tooth) * 0.375 + 0.5px)) bottom / var(--receipt-tooth) calc(var(--receipt-tooth) * 0.75) repeat-x, linear-gradient(#000, #000) top / 100% calc(100% - var(--receipt-tooth) * 0.7) no-repeat;
+}
+.receipt-head { display: grid; justify-items: center; gap: var(--space-1); padding-bottom: var(--space-4); margin-bottom: var(--space-3); border-bottom: var(--rule-perforation); text-align: center; }
+.receipt-head .wordmark { font-size: var(--text-h3); }
+.receipt-lines { width: 100%; border-collapse: collapse; font-size: var(--text-small); }
+.receipt-lines td { padding-block: var(--space-2); vertical-align: baseline; }
+.receipt-lines .day { width: 3.2rem; font-weight: 600; color: var(--color-text-muted); }
+.receipt-lines .item { font-weight: 700; font-stretch: var(--stretch-semi); text-transform: uppercase; }
+.receipt-lines .item small { display: block; font-size: var(--text-fine); font-weight: 400; font-stretch: var(--stretch-normal); text-transform: none; color: var(--color-text-muted); }
+.receipt-lines .amt { text-align: right; white-space: nowrap; font-size: var(--text-h4); font-weight: 800; font-stretch: var(--stretch-condensed); }
+.receipt-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: var(--space-3); padding-top: var(--space-3); border-top: var(--rule-perforation); font-size: var(--text-h3); font-weight: 800; font-stretch: var(--stretch-condensed); text-transform: uppercase; }
+.receipt-foot { margin-top: var(--space-4); font-size: var(--text-fine); color: var(--color-text-subtle); text-align: center; }
+/* The receipt prints once when it scrolls into view, like a counter printer: it comes up out of a slot
+   at its bottom edge, header first, at a steady feed; the last bit of paper ejects a touch quicker; then
+   it's torn off and set down at its tilt as the shadow deepens. Only runs when the script has marked it
+   ready; otherwise (or with reduced motion) the finished receipt simply shows. */
+.receipt-object.is-ready { transform: none; filter: drop-shadow(var(--shadow-receipt-printing)); }
+.receipt-object.is-ready .receipt { transform: translateY(100%); clip-path: inset(0 0 100% 0); }
+.receipt-object.is-printing {
+  animation: receipt-set var(--dur-receipt-set) var(--ease-out) calc(var(--delay-receipt) + var(--receipt-print-time) + var(--dur-receipt-eject)) both;
+}
+.receipt-object.is-printing .receipt {
+  animation: receipt-rise calc(var(--receipt-print-time) + var(--dur-receipt-eject)) linear var(--delay-receipt) both;
+}
+@keyframes receipt-rise {
+  0%   { transform: translateY(100%); clip-path: inset(0 0 100% 0); }
+  86%  { transform: translateY(12%); clip-path: inset(0 0 12% 0); animation-timing-function: var(--ease-in-cubic); }
+  100% { transform: none; clip-path: inset(0); }
+}
+@keyframes receipt-set {
+  from { transform: none; filter: drop-shadow(var(--shadow-receipt-printing)); }
+  to   { transform: rotate(var(--receipt-tilt)); filter: drop-shadow(var(--shadow-receipt)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .receipt-object.is-ready { transform: rotate(var(--receipt-tilt)); filter: drop-shadow(var(--shadow-receipt)); animation: none; }
+  .receipt-object.is-ready .receipt { transform: none; clip-path: none; animation: none; }
+}
+@media (max-width: 30rem) { .receipt-object { width: calc(100% - var(--space-3)); transform: rotate(calc(var(--receipt-tilt) / 2)); } }
+
+/* ── Steps (numbered because order matters) ── */
+.steps { list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: var(--space-6) var(--space-7); counter-reset: step; }
+.step { counter-increment: step; display: grid; grid-template-columns: calc(var(--text-num-xl) * 0.65) 1fr; column-gap: var(--space-4); align-items: start; }
+.step::before {
+  content: counter(step);
+  grid-row: span 2;
+  font-size: var(--text-num-xl); font-weight: 800; font-stretch: var(--stretch-condensed); line-height: var(--leading-numeral);
+  color: var(--color-text);
+}
+.step h3 { margin-bottom: var(--space-2); }
+.step p { color: var(--color-text-muted); max-width: 32ch; }
+
+/* ── Terms list (checked) ── */
+.terms { list-style: none; display: grid; gap: var(--space-3); }
+.terms li { display: grid; grid-template-columns: var(--icon-md) 1fr; gap: var(--space-3); align-items: start; }
+.terms svg { width: var(--icon-md); height: var(--icon-md); margin-top: 0.15rem; color: var(--color-brand-text); }
+.terms strong { font-weight: 750; }
+.band .terms svg { color: var(--color-band-accent); }
+
+/* ── Notice (form success) ── */
+.notice { display: grid; grid-template-columns: auto 1fr; gap: var(--space-4); align-items: start; padding: var(--space-5); border: var(--border-panel); background: var(--color-surface); }
+.notice .tick { width: var(--tick-disc); height: var(--tick-disc); border-radius: var(--radius-full); background: var(--color-brand); color: var(--color-on-brand); display: grid; place-items: center; }
+.notice .tick svg { width: var(--icon-lg); height: var(--icon-lg); }
+
+/* ── Sample tag ── */
+.tag-sample {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: calc(var(--space-1) / 2) var(--space-2);
+  border: var(--border-tag);
+  font-size: var(--text-fine); font-weight: 700; line-height: var(--leading-fine);
+  color: var(--color-text-muted);
+}
+
+
+/* ── Site nav ── */
+.site-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding-block: var(--space-5); border-bottom: var(--rule-double); }
+
+/* ── Ink band ── */
+.band { background: var(--color-band); color: var(--color-on-band); }
+.band .muted { color: var(--color-on-band-muted); }
+.band .t-display em, .band .t-h1 em { color: var(--color-brand); }
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: var(--space-8) var(--space-9);
+  align-items: center;
+  padding-block: var(--space-8) var(--space-9);
+}
+.hero-copy .t-display { max-width: 11ch; }
+.hero-copy .t-lead { margin-top: var(--space-5); max-width: var(--measure-narrow); color: var(--color-text-muted); }
+.hero-form { margin-top: var(--space-6); max-width: var(--measure-narrow); display: grid; gap: var(--space-2); }
+.hero-form .t-fine a { color: inherit; }
+.hero-owner { margin-top: var(--space-6); font-size: var(--text-small); color: var(--color-text-muted); }
+.hero-card { display: grid; justify-items: center; }
+@media (max-width: 56rem) {
+  /* Phones: the card sits between the headline and the sub-line, so it's in the first screen */
+  .hero { grid-template-columns: 1fr; gap: var(--space-6); padding-block: var(--space-6) var(--space-8); }
+  .hero-copy { display: contents; }
+  .hero .t-display { order: 1; }
+  .hero-card { order: 2; justify-items: start; padding-inline: var(--space-2); } /* keeps the tilted corners inside the margin */
+  .hero-copy > :not(.t-display) { order: 3; margin-top: 0; }
+  .hero-card .punch-card { border-radius: var(--radius-card-sm); max-width: var(--card-max-phone); --card-pad: var(--card-pad-compact); --punch-gap: var(--punch-gap-compact); }
+  .hero-card .pc-head { margin-bottom: var(--space-3); }
+  .hero-card .pc-title, .hero-card .pc-count, .hero-card .pc-foot { font-size: var(--text-card); }
+  .hero-card .pc-count b { font-size: var(--text-num-sm); }
+  .hero-card .pc-foot { margin-top: var(--space-3); padding-top: var(--space-3); }
+}
+
+/* ==========================================================================
+   PAGE LAYOUT
+   ========================================================================== */
+.wrap { width: min(100% - 2 * var(--gutter), var(--page-max)); margin-inline: auto; }
+.site-nav .link { font-size: var(--text-small); }
+
+.section { padding-block: var(--space-section); border-top: var(--rule-double); }
+.section-head { display: grid; gap: var(--space-4); max-width: 40rem; margin-bottom: var(--space-7); }
+.section-head p { color: var(--color-text-muted); }
+
+/* How it works: three numbered steps beside one app screen (the counter screen) */
+.how-grid { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: var(--space-9); align-items: center; }
+.screen-figure { order: -1; margin: 0; display: grid; justify-items: center; gap: var(--space-3); width: 14rem; } /* the page zigzags: card right, phone left, receipt right */
+.how-copy { display: grid; gap: var(--space-7); align-content: center; } /* the heading labels the phone beside it */
+.how-grid .steps { grid-template-columns: 1fr; gap: var(--space-6); }
+/* The steps are the product explanation: larger type fills the width without longer lines */
+.how-grid .step h3 { font-size: var(--text-h3); }
+.how-grid .step p { max-width: 40rem; font-size: var(--text-lead); line-height: var(--leading-small); }
+.how-grid .step::before { font-size: calc(var(--text-num-xl) * 1.15); }
+.screen-slot {
+  display: block;
+  width: 100%;
+  max-width: 14rem;
+  /* A whole phone screen in a flat ink bezel: drawn, not photographed (no notch, buttons or shadow) */
+  border-radius: calc(var(--radius-device) + var(--device-bezel));
+  border: var(--device-bezel) solid var(--color-device);
+  background: var(--color-device);
+  overflow: hidden;
+}
+.screen-slot img { display: block; width: 100%; height: auto; }
+@media (max-width: 56rem) {
+  .how-grid { grid-template-columns: 1fr; gap: var(--space-7); }
+  .screen-figure { order: 0; }
+  .screen-slot { max-width: 13rem; }
+}
+
+/* Spend anywhere: the headline's claim, proved by one diner's receipt */
+.rewards { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: var(--space-8); align-items: center; }
+.rewards .section-head { margin-bottom: 0; }
+.rewards .receipt-object { justify-self: center; }
+@media (max-width: 56rem) { .rewards { grid-template-columns: 1fr; gap: var(--space-7); } }
+
+/* Closing ink band: the sign-up again, beside an empty card (the page opens and closes on the card) */
+.band-inner { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr); gap: var(--space-9); align-items: center; padding-block: var(--space-section); }
+.band-copy { display: grid; gap: var(--space-5); justify-items: start; }
+.band-copy .t-h2 { max-width: 18ch; }
+.band-copy .t-lead { max-width: 36rem; }
+.band-form { width: 100%; max-width: var(--measure-narrow); display: grid; gap: var(--space-2); }
+.band .input { border-color: var(--color-on-band); }
+.band .slip .input { border-right: 2px dashed var(--color-band); } /* ink dashes between the two light surfaces, like the receipt */
+@media (max-width: 30rem) { .band .slip .input { border-right: var(--border-control); border-color: var(--color-on-band); } } /* stacked: a plain edge */
+.band .label { color: var(--color-on-band); }
+.band .t-fine, .band .t-fine a, .band .link-button { color: var(--color-on-band-muted); }
+.band .notice { color: var(--color-text); }
+.band .notice .muted { color: var(--color-text-muted); } /* the notice is a light panel: use the light-surface grey */
+.band .error-msg { color: var(--crimson-300); }
+.band-card { display: grid; justify-items: center; }
+.band-card .punch-card { --card-tilt: 3deg; max-width: 26rem; }
+@media (max-width: 56rem) {
+  .band-inner { grid-template-columns: 1fr; gap: var(--space-8); }
+  .band-card { justify-items: start; padding-inline: var(--space-2); }
+  .band-card .punch-card { max-width: var(--card-max-phone); --card-pad: var(--card-pad-compact); --punch-gap: var(--punch-gap-compact); border-radius: var(--radius-card-sm); }
+  .band-card .pc-title, .band-card .pc-count, .band-card .pc-foot { font-size: var(--text-card); }
+  .band-card .pc-count b { font-size: var(--text-num-sm); }
+}
+
+/* Footer */
+.site-foot { padding-block: var(--space-6); font-size: var(--text-small); color: var(--color-text-muted); }
+.site-foot .wrap { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
+.site-foot a { color: inherit; text-underline-offset: var(--underline-offset); }
+
+/* Waitlist steps after joining */
+.link-button {
+  font: inherit; font-size: var(--text-small);
+  color: var(--color-text-muted);
+  background: none; border: 0; padding: 0;
+  text-decoration: underline; text-underline-offset: var(--underline-offset);
+  cursor: pointer;
+}
+.waitlist-step { display: grid; gap: var(--space-4); }
+.waitlist-step .notice { padding: var(--space-4); }
+[data-waitlist] { scroll-margin-top: var(--space-7); }
+
+/* ==========================================================================
+   PHONES: most visitors arrive here. Desktop is unaffected.
+   ========================================================================== */
+/* Comfortable tap targets for small links, without changing how they look */
+.site-nav .link, .site-foot a { display: inline-block; padding-block: 0.6rem; margin-block: -0.6rem; }
+@media (max-width: 30rem) {
+  /* Hero: keep the sign-up button inside the first screen, even at 360px */
+  .site-nav { padding-block: var(--space-4); }
+  .hero { gap: var(--space-5); padding-block: var(--space-5) var(--space-7); }
+  .hero-copy .t-lead { font-size: var(--text-body); line-height: var(--leading-small); }
+  /* How it works: normal-size steps, and the phone smaller and centred */
+  .how-grid .step h3 { font-size: var(--text-menu); }
+  .how-grid .step p { font-size: var(--text-body); }
+  .how-grid .step::before { font-size: var(--text-num-xl); }
+  .how-grid .steps { gap: var(--space-5); }
+  .screen-figure { justify-self: center; width: 12rem; }
+  /* Closing band: the stacked button keeps a clean edge */
+  .band .slip .btn { border-color: var(--color-on-band); }
+  .site-foot .wrap { gap: var(--space-3) var(--space-5); }
 }

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nibblr — One punch card for the whole neighborhood</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23b94c2d'/><text x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='22' fill='white'>N</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e0432a'/><circle cx='11' cy='16' r='4.5' fill='%23f5f5f2'/><circle cx='21' cy='16' r='4.5' fill='%23f5f5f2' fill-opacity='.35'/></svg>" />
     <meta name="description" content="One punch card for the East Village's independent restaurants. Get a punch every visit and spend your punches at any Nibblr spot. Join the waitlist." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://joinnibblr.com/" />
@@ -15,142 +15,321 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Nibblr: one punch card for the whole neighborhood. An orange punch card with 8 of 10 punches filled." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <link rel="preload" href="fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="site.css" />
   </head>
-  <body class="home-page">
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/></symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5v7M12 16v2"/></g></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol>
+      </defs>
+    </svg>
 
-    <!-- Nav -->
-    <nav>
-      <a class="nav-logo" href="#">Nibblr</a>
-      <a class="nav-cta" href="#waitlist">Join the waitlist</a>
-    </nav>
+    <header class="wrap site-nav">
+      <a class="wordmark" href="/">Nibblr</a>
+      <a class="link" href="#waitlist">Join the waitlist</a>
+    </header>
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero-copy">
-        <div class="hero-badge">Coming soon to the East Village</div>
-        <h1>One punch card for <span>the whole neighborhood.</span></h1>
-        <p>
-          Get a punch every time you eat at an independent East Village spot,
-          then spend them at any Nibblr restaurant, not just where you earned them.
-        </p>
-      </div>
+    <main>
+      <section class="wrap hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 class="t-display" id="hero-title">One punch card for <em>the whole neighborhood.</em></h1>
+          <p class="t-lead">Get a punch whenever you spend $10 or more at an independent East Village spot, then spend your punches at any Nibblr restaurant, not just where you earned them.</p>
 
-      <p class="owner-line">
-        Own a restaurant in the East Village? <a href="restaurants.html">Talk to us about joining the first group.</a>
-      </p>
+          <!-- Waitlist: email only, then one optional question, then a share link.
+               Both steps post to Formspark in the background and share the sign-up's code. -->
+          <div class="hero-form waitlist" id="waitlist" data-waitlist>
+            <form class="waitlist-step wl-form" action="https://submit-form.com/71qjJs8oy" method="POST" novalidate>
+              <p class="t-h4 wl-heading" hidden></p>
+              <div>
+                <label class="label visually-hidden" for="wl-email">Email</label>
+                <div class="slip">
+                  <input class="input" id="wl-email" type="email" name="email" autocomplete="email" placeholder="you@email.com" required />
+                  <button class="btn btn-primary" type="submit">Join the waitlist</button>
+                </div>
+              </div>
+              <!-- Spam honeypot: hidden from people, filled in by bots -->
+              <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+              <p class="error-msg form-error" role="alert" hidden><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+              <p class="t-fine">Free. We’ll only email you about Nibblr’s launch in the East Village. <a href="privacy.html">Privacy</a></p>
+            </form>
 
-      <!-- Waitlist: email only, then one optional question, then a share link.
-           Both steps post to Formspark in the background and share the sign-up's code. -->
-      <div class="waitlist" id="waitlist">
-        <form id="waitlist-form" action="https://submit-form.com/71qjJs8oy" method="POST">
-          <h2 id="waitlist-heading">Be the first to know</h2>
-          <div class="field">
-            <label for="wl-email">Email</label>
-            <input id="wl-email" type="email" name="email" autocomplete="email" required />
+            <form class="waitlist-step wl-spots" action="https://submit-form.com/71qjJs8oy" method="POST" novalidate hidden>
+              <div class="notice" role="status">
+                <span class="tick"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+                <div><p class="t-h4">You’re in.</p><p class="t-small muted">One quick question to help us pick the first spots:</p></div>
+              </div>
+              <div class="field">
+                <label class="label" for="wl-spots">Which East Village spots do you already go to?</label>
+                <div class="slip">
+                  <input class="input" id="wl-spots" type="text" name="spots" placeholder="Name 2 or 3" maxlength="300" required />
+                  <button class="btn btn-primary" type="submit">Send</button>
+                </div>
+              </div>
+              <p class="error-msg form-error" role="alert" hidden><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+              <p><button class="link-button wl-skip" type="button">Skip</button></p>
+            </form>
+
+            <div class="waitlist-step wl-joined" hidden>
+              <div class="notice" role="status">
+                <span class="tick"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+                <div><p class="t-h4">You’re all set.</p><p class="t-small muted">We’ll email you when the first spots are announced.</p></div>
+              </div>
+              <div class="field">
+                <label class="label" for="wl-share">Invite friends who eat around here</label>
+                <div class="slip">
+                  <input id="wl-share" class="input wl-share-url" type="text" readonly />
+                  <button class="btn btn-primary wl-share-button" type="button">Copy</button>
+                </div>
+              </div>
+              <p><button class="link-button wl-reset" type="button">Not you? Sign up with a different email</button></p>
+            </div>
           </div>
-          <!-- Spam honeypot: hidden from people, filled in by bots -->
-          <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
-          <button class="btn-primary" type="submit">Join the waitlist</button>
-          <p class="form-error" role="alert" hidden></p>
-          <p class="fine-print">
-            Free. We'll only email you about Nibblr's launch in the East Village.
-            <a href="privacy.html">Privacy</a>
-          </p>
-        </form>
 
-        <form id="spots-form" action="https://submit-form.com/71qjJs8oy" method="POST" hidden>
-          <div class="check" aria-hidden="true">✓</div>
-          <h2>You're in.</h2>
-          <p class="step-lead">One quick question to help us pick the first spots:</p>
-          <div class="field">
-            <label for="wl-spots">Which East Village spots do you already go to?</label>
-            <input id="wl-spots" type="text" name="spots" placeholder="Name 2 or 3" maxlength="300" required />
+          <p class="hero-owner">Own a restaurant in the East Village? <a class="link" href="restaurants.html">Talk to us about the free pilot.</a></p>
+        </div>
+
+        <div class="hero-card">
+          <button class="card-button" type="button" disabled aria-label="Add a punch to the sample card">
+            <span class="punch-card is-tilted">
+              <span class="pc-head"><span class="pc-title">Your punch card</span><span class="pc-count num"><b data-count>5</b>punches</span></span>
+              <span class="pc-grid" aria-hidden="true">
+                <span class="punch is-filled"></span><span class="punch is-filled"></span><span class="punch is-filled"></span><span class="punch is-filled"></span><span class="punch is-filled is-new is-showcase"></span>
+                <span class="punch"></span><span class="punch"></span><span class="punch"></span><span class="punch"></span><span class="punch"></span>
+              </span>
+              <span class="pc-foot"><span data-foot>Enough for a 5-punch reward</span></span>
+            </span>
+          </button>
+          <p class="visually-hidden" aria-live="polite" data-card-status>Sample punch card: 5 of 10 punches. Enough for a 5-punch reward.</p>
+          <script>
+            // The hero card plays the app's punch moment on load (one punch short, then the stamp lands,
+            // the total rolls up and the footer crossfades), then lets visitors stamp it themselves:
+            // any press on the card punches the next hole in order, up to a full card. Wording and timings
+            // follow the app (see site.css tokens).
+            (function () {
+              var button = document.currentScript.previousElementSibling.previousElementSibling;
+              var status = document.currentScript.previousElementSibling;
+              var holes = Array.prototype.slice.call(button.querySelectorAll('.punch'));
+              var count = button.querySelector('[data-count]');
+              var foot = button.querySelector('[data-foot]');
+              var tiers = [3, 5, 10, 15];
+              var css = getComputedStyle(document.documentElement);
+              var ms = function (name) { return parseFloat(css.getPropertyValue(name)); };
+              var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+              // Like the app: "Enough for…" when a punch has just reached a reward level; otherwise the next level.
+              function footerFor(n, justLanded) {
+                if (justLanded && tiers.indexOf(n) !== -1) return 'Enough for a ' + n + '-punch reward';
+                var next = tiers.filter(function (t) { return t > n; })[0];
+                return next ? (next - n) + ' more for a ' + next + '-punch reward' : 'Enough for any reward';
+              }
+              function rollTo(n) {
+                count.innerHTML = '<span class="roll"><span class="roll-out">' + (n - 1) +
+                  '</span><span class="roll-in">' + n + '</span></span>';
+              }
+              // The footer changes once the presses pause, so rapid taps show one change, not several.
+              var footTimer = null;
+              function settleFooter(n, wait) {
+                clearTimeout(footTimer);
+                footTimer = setTimeout(function () {
+                  var text = footerFor(n, true);
+                  if (foot.textContent === text) return;
+                  foot.style.opacity = '0';
+                  setTimeout(function () { foot.textContent = text; foot.style.opacity = '1'; }, ms('--dur-footer-crossfade') / 2);
+                }, wait);
+              }
+              function describe(n) {
+                return n >= holes.length ? 'Sample punch card is full: ' + n + ' punches. ' + footerFor(n, true) + '.'
+                                         : 'Sample punch card: ' + n + ' of ' + holes.length + ' punches. ' + footerFor(n, true) + '.';
+              }
+              // Until the visitor's first tap, the next hole keeps glowing so the card reads as tappable.
+              // After that it glows a few times: after each tap, and whenever the card is hovered or focused
+              // (only if it isn't already glowing, so nothing restarts mid-glow).
+              function invite() {
+                var next = button.querySelector('.punch.is-next');
+                if (!next || button.disabled) return;
+                if (next.classList.contains('is-inviting') && next.getAnimations && next.getAnimations().length) return;
+                next.classList.remove('is-inviting');
+                void next.offsetWidth;
+                next.classList.add('is-inviting');
+              }
+              function markNext(n) {
+                holes.forEach(function (h, i) {
+                  h.classList.toggle('is-next', i === n);
+                  h.classList.remove('is-inviting');
+                });
+                invite();
+              }
+              button.addEventListener('pointerenter', invite);
+              button.addEventListener('focus', invite);
+
+              var punches = Number(count.textContent);
+
+              // 1. The opening moment: start one short, then the stamp lands.
+              count.textContent = String(punches - 1);
+              foot.textContent = footerFor(punches - 1);
+              var impact = ms('--delay-stamp-showcase') +
+                (reduced ? ms('--dur-stamp-reduced') : ms('--dur-stamp-showcase') * ms('--stamp-impact'));
+              var settled = ms('--delay-stamp-showcase') + (reduced ? ms('--dur-stamp-reduced') : ms('--dur-stamp-showcase'));
+              setTimeout(function () { rollTo(punches); settleFooter(punches, 0); }, impact);
+
+              // 2. Then the card is the visitor's to stamp.
+              setTimeout(function () {
+                button.disabled = false;
+                markNext(punches);
+              }, settled);
+
+              button.classList.add('is-untapped');
+              button.addEventListener('click', function () {
+                button.classList.remove('is-untapped');
+                if (punches >= holes.length) return;
+                var hole = holes[punches];
+                punches += 1;
+                hole.classList.remove('is-showcase', 'is-new', 'is-tapped');
+                void hole.offsetWidth; // restart the stamp
+                hole.classList.add('is-filled', 'is-tapped');
+                setTimeout(function () { rollTo(punches); }, reduced ? 0 : ms('--dur-stamp') * 0.5);
+                settleFooter(punches, ms('--dur-footer-wait'));
+                markNext(punches);
+                status.textContent = describe(punches);
+                if (punches >= holes.length) {
+                  button.disabled = true;
+                  button.setAttribute('aria-label', 'The sample punch card is full');
+                }
+              });
+            })();
+          </script>
+        </div>
+      </section>
+
+      <section class="section how" aria-labelledby="how-title">
+        <div class="wrap">
+          <div class="how-grid">
+            <div class="how-copy">
+              <h2 class="t-h2" id="how-title">At the counter</h2>
+              <ol class="steps">
+                <li class="step">
+                  <h3 class="t-menu">Tap the tag to earn</h3>
+                  <p>On orders of $10 or more, tap your phone on the Nibblr tag at the register. That’s a punch.</p>
+                </li>
+                <li class="step">
+                  <h3 class="t-menu">Show the screen to spend</h3>
+                  <p>Pick a reward, then show your phone to the cashier. The same tap earns a punch too.</p>
+                </li>
+              </ol>
+            </div>
+            <figure class="screen-figure">
+              <picture class="screen-slot">
+                <img src="images/screen-reward.webp" width="390" height="844" loading="lazy" alt="Sample app screen: the counter screen, all tomato red, showing a Baklava reward from Cedar &amp; Saffron for 3 punches, 9:57 left to use it" />
+              </picture>
+              <figcaption class="t-fine">Sample screen.</figcaption>
+            </figure>
           </div>
-          <button class="btn-primary" type="submit">Send</button>
-          <p class="form-error" role="alert" hidden></p>
-          <p class="fine-print"><button class="link-button" type="button" id="spots-skip">Skip</button></p>
-        </form>
+        </div>
+      </section>
 
-        <div class="joined" id="waitlist-joined" hidden>
-          <div class="check" aria-hidden="true">✓</div>
-          <h2>You're all set</h2>
-          <p>We'll email you when the first spots are announced.</p>
-          <p>Invite friends who eat around here:</p>
-          <div class="share-link">
-            <input id="share-url" type="text" readonly aria-label="Your share link" />
-            <button class="btn-primary" type="button" id="share-button">Copy</button>
+      <section class="section" aria-labelledby="rewards-title">
+        <div class="wrap rewards">
+          <div class="section-head">
+            <h2 class="t-h2" id="rewards-title">What punches buy.</h2>
+            <p class="t-lead">Every spot prices its rewards at 3, 5, 10 or 15 punches, like baklava for 3 or a shawarma plate for 15. Punches from anywhere work everywhere.</p>
+          </div>
+          <figure class="receipt-object" aria-label="Sample receipt: one diner’s week, four punches earned at three spots, three spent on baklava, balance 1 punch">
+            <div class="receipt">
+              <div class="receipt-head"><span class="wordmark" aria-hidden="true">Nibblr</span></div>
+              <table class="receipt-lines"><tbody>
+                <tr><td class="day">Mon</td><td class="item">Cedar &amp; Saffron</td><td class="amt num">+1</td></tr>
+                <tr><td class="day">Tue</td><td class="item">Sakura Den</td><td class="amt num">+1</td></tr>
+                <tr><td class="day">Thu</td><td class="item">Brick &amp; Stone Pizza</td><td class="amt num">+1</td></tr>
+                <tr><td class="day">Fri</td><td class="item">Sakura Den</td><td class="amt num">+1</td></tr>
+                <tr class="is-reward"><td class="day">Sat</td><td class="item">Reward: Baklava<small>at Cedar &amp; Saffron</small></td><td class="amt num">−3</td></tr>
+              </tbody></table>
+              <p class="receipt-total"><span>Balance</span><span class="num">1 punch</span></p>
+              <p class="receipt-foot">Sample week.</p>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="band" aria-labelledby="closing-title">
+        <div class="wrap band-inner">
+          <div class="band-copy">
+            <h2 class="t-h2" id="closing-title">Be one of the first in the East Village.</h2>
+            <p class="t-lead muted">Free to join. We’ll let you know when the first Nibblr spots are announced.</p>
+            <div class="band-form waitlist" id="waitlist-band" data-waitlist>
+            <form class="waitlist-step wl-form" action="https://submit-form.com/71qjJs8oy" method="POST" novalidate>
+              <div>
+                <label class="label visually-hidden" for="band-email">Email</label>
+                <div class="slip">
+                  <input class="input" id="band-email" type="email" name="email" autocomplete="email" placeholder="you@email.com" required />
+                  <button class="btn btn-primary" type="submit">Join the waitlist</button>
+                </div>
+              </div>
+              <!-- Spam honeypot: hidden from people, filled in by bots -->
+              <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+              <p class="error-msg form-error" role="alert" hidden><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+              <p class="t-fine">Free. We’ll only email you about Nibblr’s launch in the East Village. <a href="privacy.html">Privacy</a></p>
+            </form>
+
+            <form class="waitlist-step wl-spots" action="https://submit-form.com/71qjJs8oy" method="POST" novalidate hidden>
+              <div class="notice" role="status">
+                <span class="tick"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+                <div><p class="t-h4">You’re in.</p><p class="t-small muted">One quick question to help us pick the first spots:</p></div>
+              </div>
+              <div class="field">
+                <label class="label" for="band-spots">Which East Village spots do you already go to?</label>
+                <div class="slip">
+                  <input class="input" id="band-spots" type="text" name="spots" placeholder="Name 2 or 3" maxlength="300" required />
+                  <button class="btn btn-primary" type="submit">Send</button>
+                </div>
+              </div>
+              <p class="error-msg form-error" role="alert" hidden><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+              <p><button class="link-button wl-skip" type="button">Skip</button></p>
+            </form>
+
+            <div class="waitlist-step wl-joined" hidden>
+              <div class="notice" role="status">
+                <span class="tick"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+                <div><p class="t-h4">You’re all set.</p><p class="t-small muted">We’ll email you when the first spots are announced.</p></div>
+              </div>
+              <div class="field">
+                <label class="label" for="band-share">Invite friends who eat around here</label>
+                <div class="slip">
+                  <input id="band-share" class="input wl-share-url" type="text" readonly />
+                  <button class="btn btn-primary wl-share-button" type="button">Copy</button>
+                </div>
+              </div>
+              <p><button class="link-button wl-reset" type="button">Not you? Sign up with a different email</button></p>
+            </div>
+          </div>
+          </div>
+          <div class="band-card">
+            <div class="punch-card is-tilted" role="img" aria-label="An empty Nibblr punch card, ready for its first punch">
+              <div class="pc-head"><span class="pc-title">Your punch card</span><span class="pc-count num"><b>0</b>punches</span></div>
+              <ol class="pc-grid" aria-hidden="true"><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li></ol>
+              <div class="pc-foot"><span>3 more for a 3-punch reward</span></div>
+            </div>
           </div>
         </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <a href="restaurants.html">For restaurants</a>
+        <a href="privacy.html">Privacy</a>
+        <span>© 2026 Nibblr</span>
       </div>
-
-    </section>
-
-    <!-- How it works -->
-    <section class="how">
-      <p class="section-label">How it works</p>
-      <h2 class="section-title">One card. Three easy steps.</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number" aria-hidden="true">01</div>
-          <h3>Pay, then tap</h3>
-          <p>After you pay, tap your phone on the Nibblr tag at the register. That’s a punch.</p>
-        </div>
-        <div class="step">
-          <div class="step-number" aria-hidden="true">02</div>
-          <h3>Punch anywhere</h3>
-          <p>Lunch at one spot, dinner at another. Your punches add up on one card across the neighborhood.</p>
-        </div>
-        <div class="step">
-          <div class="step-number" aria-hidden="true">03</div>
-          <h3>Spend them anywhere</h3>
-          <p>Trade 3, 5, 10, or 15 punches for free items or money off at any Nibblr spot—not just where you earned them.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- The app -->
-    <section class="screenshots" id="app">
-      <p class="section-label">The app</p>
-      <h2 class="section-title">Your neighborhood, in your pocket.</h2>
-      <div class="screenshot-grid">
-        <figure class="phone-frame">
-          <img src="app-discover.jpg" width="640" height="1387" loading="lazy" alt="Discover: nearby spots with walking times and their rewards" />
-          <figcaption>Find spots nearby and see what your punches get you</figcaption>
-        </figure>
-        <figure class="phone-frame">
-          <img src="app-card.jpg" width="640" height="1387" loading="lazy" alt="Wallet: a punch card filling up" />
-          <figcaption>One card fills up wherever you eat</figcaption>
-        </figure>
-        <figure class="phone-frame">
-          <img src="app-reward.jpg" width="640" height="1387" loading="lazy" alt="A reward ready to use at the counter" />
-          <figcaption>Use a reward with one tap at the counter</figcaption>
-        </figure>
-      </div>
-      <p class="screenshot-note">Sample restaurants shown. The first Nibblr spots will be announced soon.</p>
-    </section>
-
-    <!-- Closing sign-up -->
-    <section class="closing">
-      <h2>Be one of the first in the East Village.</h2>
-      <p>Free to join. We’ll let you know when the first Nibblr spots are announced.</p>
-      <a class="btn-primary" href="#waitlist">Join the waitlist</a>
-    </section>
-
-    <footer>
-      <a href="restaurants.html">Own a restaurant? Partner with Nibblr</a>
-      · <a href="privacy.html">Privacy</a>
-      · &copy; 2026 Nibblr
     </footer>
 
     <script>
       (function () {
-        var form = document.getElementById('waitlist-form');
-        var spotsForm = document.getElementById('spots-form');
-        var joined = document.getElementById('waitlist-joined');
-        var card = document.getElementById('waitlist');
-        var shareUrl = document.getElementById('share-url');
-        var shareButton = document.getElementById('share-button');
+        // Every sign-up form on the page ([data-waitlist]) shares this logic and stays in sync:
+        // sign up in one and both show your share link.
+        var widgets = Array.prototype.slice.call(document.querySelectorAll('[data-waitlist]'));
         var STORAGE_KEY = 'nibblr_waitlist_code';
         var email = '';
         var code = '';
@@ -177,21 +356,20 @@
           return ref === storedCode() ? '' : ref;
         }
 
-        function showOnly(element) {
-          [form, spotsForm, joined].forEach(function (el) { el.hidden = el !== element; });
-        }
-
-        function showJoined(withCode) {
-          shareUrl.value = 'https://joinnibblr.com/?ref=' + withCode;
-          if (navigator.share) shareButton.textContent = 'Share';
-          showOnly(joined);
-          card.classList.add('done');
+        // A visible message for an empty or malformed field, next to the browser's own hint.
+        function showInvalid(target, message) {
+          var error = target.querySelector('.form-error');
+          error.querySelector('span').textContent = message;
+          error.hidden = false;
+          var field = target.querySelector('.input:invalid');
+          if (field) { field.setAttribute('aria-invalid', 'true'); field.focus(); }
         }
 
         // Posts to Formspark as JSON; the button shows progress and errors appear under it.
         function send(target, data, busyLabel) {
           var button = target.querySelector('button[type=submit]');
           var error = target.querySelector('.form-error');
+          var errorText = error.querySelector('span');
           var label = button.textContent;
           button.disabled = true;
           button.textContent = busyLabel;
@@ -205,7 +383,7 @@
               if (!response.ok) throw new Error('HTTP ' + response.status);
             })
             .catch(function (err) {
-              error.textContent = "That didn't go through. Please try again, or email hello@joinnibblr.com.";
+              errorText.textContent = "That didn't go through. Please try again, or email hello@joinnibblr.com.";
               error.hidden = false;
               button.disabled = false;
               button.textContent = label;
@@ -213,56 +391,147 @@
             });
         }
 
-        shareButton.addEventListener('click', function () {
-          if (navigator.share) {
-            navigator.share({ title: 'Nibblr', text: 'Join me on the Nibblr waitlist', url: shareUrl.value })
-              .catch(function () {});
-            return;
-          }
-          shareUrl.select();
-          var copied = navigator.clipboard
-            ? navigator.clipboard.writeText(shareUrl.value)
-            : Promise.resolve(document.execCommand('copy'));
-          copied.then(function () { shareButton.textContent = 'Copied'; }).catch(function () {});
+        function part(widget, name) { return widget.querySelector(name); }
+
+        function showOnly(widget, step) {
+          ['.wl-form', '.wl-spots', '.wl-joined'].forEach(function (name) {
+            part(widget, name).hidden = name !== step;
+          });
+        }
+
+        // Every form on the page switches to the share link.
+        function showJoinedEverywhere(withCode) {
+          widgets.forEach(function (widget) {
+            var shareButton = part(widget, '.wl-share-button');
+            part(widget, '.wl-share-url').value = 'https://joinnibblr.com/?ref=' + withCode;
+            if (navigator.share) shareButton.textContent = 'Share';
+            showOnly(widget, '.wl-joined');
+            widget.classList.add('done');
+          });
+        }
+
+        widgets.forEach(function (widget) {
+          var form = part(widget, '.wl-form');
+          var spotsForm = part(widget, '.wl-spots');
+          var shareUrl = part(widget, '.wl-share-url');
+          var shareButton = part(widget, '.wl-share-button');
+
+          // Clear an error message as soon as the field is fixed.
+          widget.querySelectorAll('.input').forEach(function (field) {
+            field.addEventListener('input', function () {
+              if (!field.validity.valid) return;
+              field.removeAttribute('aria-invalid');
+              var error = field.form && field.form.querySelector('.form-error');
+              if (error) error.hidden = true;
+            });
+          });
+
+          shareButton.addEventListener('click', function () {
+            if (navigator.share) {
+              navigator.share({ title: 'Nibblr', text: 'Join me on the Nibblr waitlist', url: shareUrl.value })
+                .catch(function () {});
+              return;
+            }
+            shareUrl.select();
+            var copied = navigator.clipboard
+              ? navigator.clipboard.writeText(shareUrl.value)
+              : Promise.resolve(document.execCommand('copy'));
+            copied.then(function () { shareButton.textContent = 'Copied'; }).catch(function () {});
+          });
+
+          form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (!form.checkValidity()) {
+              showInvalid(form, 'Enter your email address, like name@example.com.');
+              return;
+            }
+            email = form.elements.email.value.trim();
+            code = newCode();
+            var data = { email: email, ref: refFromLink(), code: code };
+            if (form.elements._honeypot.checked) data._honeypot = 'on';
+            send(form, data, 'Joining…').then(function () {
+              form.querySelector('button[type=submit]').textContent = 'Join the waitlist';
+              form.querySelector('button[type=submit]').disabled = false;
+              try { localStorage.setItem(STORAGE_KEY, code); } catch (e) {}
+              // This form asks the follow-up question; any other form goes straight to the share link.
+              widgets.forEach(function (other) {
+                if (other === widget) return;
+                part(other, '.wl-share-url').value = 'https://joinnibblr.com/?ref=' + code;
+                showOnly(other, '.wl-joined');
+                other.classList.add('done');
+              });
+              showOnly(widget, '.wl-spots');
+              widget.classList.add('done');
+              widget.scrollIntoView({ block: 'center', behavior: 'smooth' });
+            }, function () {});
+          });
+
+          spotsForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            if (!spotsForm.checkValidity()) {
+              showInvalid(spotsForm, 'Name a spot or two, or skip this question.');
+              return;
+            }
+            var data = { email: email, code: code, spots: spotsForm.elements.spots.value.trim() };
+            send(spotsForm, data, 'Sending…').then(function () { showJoinedEverywhere(code); }, function () {});
+          });
+
+          part(widget, '.wl-skip').addEventListener('click', function () {
+            showJoinedEverywhere(code);
+          });
+        });
+
+        // "Not you?": forget this browser's sign-up and show the forms again.
+        widgets.forEach(function (widget) {
+          part(widget, '.wl-reset').addEventListener('click', function () {
+            try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+            email = ''; code = '';
+            widgets.forEach(function (w) {
+              w.querySelectorAll('form').forEach(function (f) { f.reset(); });
+              w.querySelectorAll('.form-error').forEach(function (e) { e.hidden = true; });
+              w.querySelectorAll('button[type=submit]').forEach(function (b) { b.disabled = false; });
+              showOnly(w, '.wl-form');
+              w.classList.remove('done');
+            });
+            widget.querySelector('.wl-form .input').focus();
+          });
         });
 
         // A friend's share link (a 6-character code, unlike channel tags such as
-        // flyer-1stave) gets a welcome as the form's heading.
-        if (!storedCode() && /^[a-z2-9]{6}$/.test(refFromLink())) {
-          document.getElementById('waitlist-heading').textContent = "You're invited";
+        // flyer-1stave) gets a welcome above the first form.
+        var invited = document.querySelector('.wl-heading');
+        if (invited && !storedCode() && /^[a-z2-9]{6}$/.test(refFromLink())) {
+          invited.textContent = "You're invited. Join the waitlist below.";
+          invited.hidden = false;
         }
 
-        // Already signed up on this browser: show their link instead of the form.
-        if (storedCode()) showJoined(storedCode());
-
-        form.addEventListener('submit', function (event) {
-          event.preventDefault();
-          if (!form.reportValidity()) return;
-          email = form.elements.email.value.trim();
-          code = newCode();
-          var data = { email: email, ref: refFromLink(), code: code };
-          if (form.elements._honeypot.checked) data._honeypot = 'on';
-          send(form, data, 'Joining…').then(function () {
-            try { localStorage.setItem(STORAGE_KEY, code); } catch (e) {}
-            showOnly(spotsForm);
-            card.classList.add('done');
-            card.scrollIntoView({ block: 'center', behavior: 'smooth' });
-          }, function () {});
-        });
-
-        spotsForm.addEventListener('submit', function (event) {
-          event.preventDefault();
-          if (!spotsForm.reportValidity()) return;
-          var data = { email: email, code: code, spots: spotsForm.elements.spots.value.trim() };
-          send(spotsForm, data, 'Sending…').then(function () { showJoined(code); }, function () {});
-        });
-
-        document.getElementById('spots-skip').addEventListener('click', function () {
-          showJoined(code);
-        });
+        // Already signed up on this browser: show their link instead of the forms.
+        if (storedCode()) showJoinedEverywhere(storedCode());
       })();
     </script>
 
+    <script>
+      // The receipt prints once as it scrolls into view (see .is-printing in site.css):
+      // the feed takes one step of --gap-receipt-line per printed line.
+      (function () {
+        var receipt = document.querySelector('.receipt-object');
+        if (!receipt || !('IntersectionObserver' in window)) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var parts = [receipt.querySelector('.receipt-head')]
+          .concat(Array.prototype.slice.call(receipt.querySelectorAll('.receipt-lines tr')))
+          .concat([receipt.querySelector('.receipt-total'), receipt.querySelector('.receipt-foot')]);
+        var css = getComputedStyle(document.documentElement);
+        var gap = parseFloat(css.getPropertyValue('--gap-receipt-line'));
+        receipt.style.setProperty('--receipt-print-time', (parts.length * gap) + 'ms');
+        receipt.classList.add('is-ready');
+        var seen = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          receipt.classList.add('is-printing');
+          seen.disconnect();
+        }, { threshold: 0.45 });
+        seen.observe(receipt);
+      })();
+    </script>
     <!-- Cloudflare Web Analytics: counts visits, no cookies -->
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "28426744a4f84bf8960464baaa427e53"}'></script>
   </body>
