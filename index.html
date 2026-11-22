@@ -372,6 +372,7 @@
           var errorText = error.querySelector('span');
           var label = button.textContent;
           button.disabled = true;
+          button.setAttribute('aria-busy', 'true'); // looks busy, not unavailable
           button.textContent = busyLabel;
           error.hidden = true;
           return fetch(target.action, {
@@ -382,6 +383,7 @@
             .then(function (response) {
               if (!response.ok) throw new Error('HTTP ' + response.status);
             })
+            .finally(function () { button.removeAttribute('aria-busy'); })
             .catch(function (err) {
               errorText.textContent = "That didn't go through. Please try again, or email hello@joinnibblr.com.";
               error.hidden = false;

@@ -60,6 +60,7 @@
   --color-band:          var(--ink-900);    /* ink band sections */
   --color-on-band:       var(--paper-100);
   --color-on-band-muted: var(--stone-300);
+  --color-on-band-error: var(--crimson-300); /* error text on the ink band */
   --color-success:       var(--green-700);
   --color-danger:        var(--crimson-700);
   --color-focus:         var(--tomato-500); /* 3.9:1 on bg, meets 3:1 for focus rings */
@@ -155,6 +156,8 @@
   --punch-gap:        clamp(0.6rem, 0.35rem + 1vw, 1.1rem);
   --punch-gap-compact: var(--space-2);
   --card-tilt:        -3deg;  /* hero only */
+  --card-tilt-band:    3deg;  /* closing card: leans the other way, so the page opens and closes in mirror */
+  --card-max-band:    26rem;  /* closing card on desktop: a little smaller than the hero card */
 
   /* ── Receipt ── */
   --receipt-max:    24rem;
@@ -636,9 +639,9 @@ a { color: inherit; }
 .band .t-fine, .band .t-fine a, .band .link-button { color: var(--color-on-band-muted); }
 .band .notice { color: var(--color-text); }
 .band .notice .muted { color: var(--color-text-muted); } /* the notice is a light panel: use the light-surface grey */
-.band .error-msg { color: var(--crimson-300); }
+.band .error-msg { color: var(--color-on-band-error); }
 .band-card { display: grid; justify-items: center; }
-.band-card .punch-card { --card-tilt: 3deg; max-width: 26rem; }
+.band-card .punch-card { --card-tilt: var(--card-tilt-band); max-width: var(--card-max-band); }
 @media (max-width: 56rem) {
   .band-inner { grid-template-columns: 1fr; gap: var(--space-8); }
   .band-card { justify-items: start; padding-inline: var(--space-2); }
