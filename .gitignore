@@ -1,0 +1,5 @@
+# AI tool folders: local setup, never published
+.agents/
+.claude/
+.codex/
+.devin/
