@@ -4,48 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nibblr</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23b94c2d'/><text x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='22' fill='white'>N</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e0432a'/><circle cx='11' cy='16' r='4.5' fill='%23f5f5f2'/><circle cx='21' cy='16' r='4.5' fill='%23f5f5f2' fill-opacity='.35'/></svg>" />
     <!--
       GitHub Pages serves this page for any path that doesn't exist, so it doubles
       as the landing page for tap links (/t?e=…&c=… from a secure tag, or /t/<code>)
       opened without the app.
       With the app installed, iOS opens the app instead and this page never loads.
     -->
-    <link rel="stylesheet" href="site.css" />
-    <style>
-      body {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-      }
-
-      main {
-        flex: 1;
-        max-width: 520px;
-        margin: 0 auto;
-        padding: 5rem 1.25rem;
-        text-align: center;
-      }
-
-      h1 {
-        font: 500 clamp(2.2rem, 7vw, 3rem)/1.05 var(--serif);
-        letter-spacing: -0.04em;
-        margin-bottom: 1rem;
-      }
-
-      main p {
-        font-size: 1.05rem;
-        line-height: 1.7;
-        color: var(--muted);
-        margin-bottom: 2rem;
-      }
-
-      .tap { display: none; }
-      body.is-tap .tap { display: block; }
-      body.is-tap .not-found { display: none; }
-    </style>
+    <meta name="theme-color" content="#f5f5f2" />
+    <link rel="preload" href="/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/site.css" />
   </head>
-  <body>
+  <body class="page-404">
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs><symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol></defs>
+    </svg>
     <script>
       var params = new URLSearchParams(location.search);
       var secureTap = /^\/t\/?$/.test(location.pathname) && params.has("e") && params.has("c");
@@ -53,30 +26,39 @@
         document.body.classList.add("is-tap");
       }
     </script>
+    <header class="wrap site-nav">
+      <a class="wordmark" href="/">Nibblr</a>
+      <a class="link" href="/#waitlist">Join the waitlist</a>
+    </header>
 
-    <nav>
-      <a class="nav-logo" href="/">Nibblr</a>
-    </nav>
-
-    <main>
+    <main class="wrap lost">
       <div class="tap">
-        <div class="hero-badge">Nibblr punch card</div>
-        <h1>Collect your punch with the Nibblr app</h1>
-        <p>
-          Get the app, sign up, and tap the tag at the register again.
-          One punch per visit, spendable at any Nibblr restaurant.
-        </p>
+        <div class="punch-card is-compact is-tilted" role="img" aria-label="An empty Nibblr punch card, waiting for its first punch">
+          <div class="pc-head"><span class="pc-title">Your punch card</span><span class="pc-count num"><b>0</b>punches</span></div>
+          <ol class="pc-grid" aria-hidden="true"><li class="punch is-next is-inviting"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li><li class="punch"></li></ol>
+          <div class="pc-foot"><span>3 more for a 3-punch reward</span></div>
+        </div>
+        <h1 class="t-h2">Collect your punch with the Nibblr app</h1>
+        <p class="t-lead">Get the app, sign up, and tap the tag at the register again. One punch per visit, spendable at any Nibblr restaurant.</p>
         <!-- TODO: replace with the App Store link once the app is published -->
-        <a class="btn-primary" href="/#waitlist">Get the app</a>
+        <a class="btn btn-primary" href="/#waitlist">Get the app <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
-
       <div class="not-found">
-        <div class="hero-badge">404</div>
-        <h1>Page not found</h1>
-        <p>This page doesn't exist, but there's plenty to eat back home.</p>
-        <a class="btn-primary" href="/">Go to Nibblr</a>
+        <h1 class="t-h2">Page not found</h1>
+        <p class="t-lead">This page doesn’t exist, but there’s plenty to eat back home.</p>
+        <a class="btn btn-primary" href="/">Go to Nibblr <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
       </div>
     </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <a href="/">Nibblr for diners</a>
+        <a href="/restaurants.html">For restaurants</a>
+        <a href="/privacy.html">Privacy</a>
+        <span>© 2026 Nibblr</span>
+      </div>
+    </footer>
+
     <!-- Cloudflare Web Analytics: counts visits, no cookies -->
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "28426744a4f84bf8960464baaa427e53"}'></script>
   </body>

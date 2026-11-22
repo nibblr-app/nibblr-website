@@ -3,75 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nibblr Privacy</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23b94c2d'/><text x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='22' fill='white'>N</text></svg>" />
-    <link rel="stylesheet" href="site.css" />
-    <style>
-      main {
-        max-width: 680px;
-        margin: 0 auto;
-        padding: 4rem 1.25rem 5rem;
-      }
-
-      h1 {
-        font: 500 clamp(2.2rem, 6vw, 3rem)/1.05 var(--serif);
-        letter-spacing: -0.04em;
-        margin-bottom: 0.5rem;
-      }
-
-      .updated { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
-
-      h2 { font: 700 1.2rem/1.3 var(--serif); margin: 2.25rem 0 0.5rem; }
-
-      p, li { margin-bottom: 0.75rem; }
-
-      ul { padding-left: 1.25rem; }
-
-      main a { color: var(--brand); }
-    </style>
+    <title>Nibblr privacy</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e0432a'/><circle cx='11' cy='16' r='4.5' fill='%23f5f5f2'/><circle cx='21' cy='16' r='4.5' fill='%23f5f5f2' fill-opacity='.35'/></svg>" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <link rel="preload" href="/fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/site.css" />
   </head>
   <body>
-    <nav>
-      <a class="nav-logo" href="/">Nibblr</a>
-    </nav>
+    <header class="wrap site-nav">
+      <a class="wordmark" href="/">Nibblr</a>
+      <a class="link" href="/#waitlist">Join the waitlist</a>
+    </header>
 
-    <main>
-      <h1>Privacy</h1>
-      <p class="updated">Last updated October 27, 2026</p>
-
-      <p>This covers the Nibblr waitlist on joinnibblr.com. The Nibblr app will have its own privacy policy when it launches.</p>
-
-      <h2>What we collect</h2>
-      <ul>
+    <main class="wrap prose-page">
+      <article class="prose">
+        <h1 class="t-h2">Privacy</h1>
+        <p class="prose-updated">Last updated November 22, 2026</p>
+        <p>This covers the Nibblr waitlist and the restaurant contact form on joinnibblr.com. The Nibblr app will have its own privacy policy when it launches.</p>
+        <h2>What we collect</h2>
+        <ul>
         <li>Your email address.</li>
         <li>If you choose to answer: the East Village spots you already go to.</li>
         <li>Which link brought you to the waitlist, such as a friend's share link or a flyer.</li>
         <li>A random code we create when you join. It's in your share link, so when friends join through it we know you sent them.</li>
-      </ul>
-
-      <h2>How we use it</h2>
-      <ul>
+        </ul>
+        <h2>How we use it</h2>
+        <ul>
         <li>To email you about Nibblr's launch in the East Village: which spots are joining, and when the app is ready.</li>
         <li>To choose which restaurants to invite first. We may tell a restaurant how many people on our list named it, but never who.</li>
         <li>To see how people hear about Nibblr, and who brought friends along.</li>
-      </ul>
-      <p>We don't sell your information or share it with advertisers.</p>
-
-      <h2>Where it's stored</h2>
-      <p>Sign-ups are collected by <a href="https://formspark.io">Formspark</a>, our form provider, and kept in our Google Workspace. When we send emails, we may use an email service to do it. These providers handle your information only on our behalf.</p>
-
-      <h2>In your browser</h2>
-      <p>When you join, your code is saved in your browser so the page can show your share link when you come back. It isn't used for tracking or ads. Clearing your browser's data for joinnibblr.com removes it.</p>
-
-      <h2>Visits</h2>
-      <p>We use <a href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> to count visits to this site and see how fast it loads. It doesn't use cookies or follow you across other sites.</p>
-
-      <h2>Leaving the list</h2>
-      <p>Every email we send has a way to unsubscribe. To have your information deleted, email <a href="mailto:hello@joinnibblr.com">hello@joinnibblr.com</a> and we'll remove it.</p>
-
-      <h2>Questions</h2>
-      <p>Email <a href="mailto:hello@joinnibblr.com">hello@joinnibblr.com</a>.</p>
+        </ul>
+        <p>We don't sell your information or share it with advertisers.</p>
+        <h2>If you run a restaurant</h2>
+        <p>If you ask for a call on our restaurants page, we collect your name, your restaurant, a phone number or email, a good time to reach you, and which link brought you there (such as a flyer). We use them only to contact you about Nibblr and to see how restaurants hear about us.</p>
+        <h2>Where it's stored</h2>
+        <p>Sign-ups are collected by <a class="link" href="https://formspark.io">Formspark</a>, our form provider, and kept in our Google Workspace. When we send emails, we may use an email service to do it. These providers handle your information only on our behalf.</p>
+        <h2>In your browser</h2>
+        <p>When you join, your code is saved in your browser so the page can show your share link when you come back. It isn't used for tracking or ads. Clearing your browser's data for joinnibblr.com removes it.</p>
+        <h2>Visits</h2>
+        <p>We use <a class="link" href="https://www.cloudflare.com/web-analytics/">Cloudflare Web Analytics</a> to count visits to this site and see how fast it loads. It doesn't use cookies or follow you across other sites.</p>
+        <h2>Leaving the list</h2>
+        <p>Every email we send has a way to unsubscribe. To have your information deleted, email <a class="link" href="mailto:hello@joinnibblr.com">hello@joinnibblr.com</a> and we'll remove it.</p>
+        <h2>Questions</h2>
+        <p>Email <a class="link" href="mailto:hello@joinnibblr.com">hello@joinnibblr.com</a>.</p>
+      </article>
     </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <a href="/">Nibblr for diners</a>
+        <a href="/restaurants.html">For restaurants</a>
+        <a href="/privacy.html">Privacy</a>
+        <span>© 2026 Nibblr</span>
+      </div>
+    </footer>
+
     <!-- Cloudflare Web Analytics: counts visits, no cookies -->
     <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "28426744a4f84bf8960464baaa427e53"}'></script>
   </body>
