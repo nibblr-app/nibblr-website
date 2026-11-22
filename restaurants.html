@@ -3,155 +3,346 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nibblr for Restaurants</title>
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23b94c2d'/><text x='50%25' y='54%25' dominant-baseline='central' text-anchor='middle' font-family='Georgia,serif' font-weight='700' font-size='22' fill='white'>N</text></svg>" />
-    <meta name="description" content="Nibblr is one punch card shared by the East Village's independent restaurants. We're choosing the first group of restaurants now." />
+    <title>Nibblr for restaurants — free 12-week pilot in the East Village</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23e0432a'/><circle cx='11' cy='16' r='4.5' fill='%23f5f5f2'/><circle cx='21' cy='16' r='4.5' fill='%23f5f5f2' fill-opacity='.35'/></svg>" />
+    <meta name="description" content="Nibblr is one punch card shared by the East Village's independent restaurants, so nearby spots send each other customers. Free 12-week pilot. No contract, no payment details." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://joinnibblr.com/restaurants.html" />
-    <meta property="og:title" content="Nibblr for Restaurants" />
-    <meta property="og:description" content="One punch card shared by the East Village's independent restaurants. We're choosing the first group of restaurants now." />
+    <meta property="og:title" content="Nibblr for restaurants: a free 12-week pilot" />
+    <meta property="og:description" content="One punch card shared by the East Village's independent restaurants. No contract, no payment details, leave anytime." />
     <meta property="og:image" content="https://joinnibblr.com/share.png?v=2" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Nibblr: one punch card for the whole neighborhood. An orange punch card with 8 of 10 punches filled." />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f5f5f2" />
+    <link rel="preload" href="fonts/archivo-var-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="site.css" />
   </head>
-  <body class="restaurant-page">
+  <body>
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M4.5 12.5l5 5 10-11" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="square"/></symbol>
+        <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="9.5"/><path d="M12 6.5v7M12 16v2"/></g></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol>
+      </defs>
+    </svg>
 
-    <!-- Nav -->
-    <nav>
-      <a class="nav-logo" href="/">Nibblr</a>
-      <a class="nav-cta" href="#contact">Talk to us</a>
-    </nav>
+    <header class="wrap site-nav">
+      <a class="wordmark" href="/">Nibblr</a>
+      <a class="link" href="#contact">Ask for a call</a>
+    </header>
 
-    <!-- Hero -->
-    <section class="page-hero restaurant-hero">
-      <div class="hero-badge"><span class="nowrap">For East Village restaurants</span> · <span class="nowrap">Free 12-week pilot</span></div>
-      <h1>One punch card for <span>the whole neighborhood</span></h1>
-      <p>
-        Diners earn and spend punches across the East Village. Nearby spots
-        send you new customers, and your regulars get one more reason to
-        come back.
-      </p>
-      <a class="btn-primary" href="#contact">Talk to us about the first group</a>
-    </section>
+    <main>
+      <section class="wrap hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 class="t-display" id="hero-title">Regulars from <em>the whole neighborhood.</em></h1>
+          <p class="t-lead">One punch card shared by the East Village’s independent restaurants. Diners earn at any Nibblr spot and can spend at yours, so nearby spots send each other customers.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact">Ask for a call <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+            <p class="t-small muted">Or email <a href="mailto:hello@joinnibblr.com?subject=Joining%20Nibblr">hello@joinnibblr.com</a></p>
+          </div>
+          <ul class="pilot-strip" aria-label="Pilot terms">
+            <li>Free 12-week pilot</li>
+            <li>No contract</li>
+            <li>No payment details</li>
+          </ul>
+        </div>
+        <div class="hero-card">
+          <button class="card-button" type="button" disabled aria-label="Add a punch to the sample diner’s card">
+            <span class="punch-card is-tilted">
+              <span class="pc-head"><span class="pc-title">A diner’s card</span><span class="pc-count num"><b data-count>5</b>punches</span></span>
+              <span class="pc-grid" aria-hidden="true">
+                <span class="punch is-filled"></span><span class="punch is-filled"></span><span class="punch is-filled"></span><span class="punch is-filled"></span><span class="punch is-filled is-new is-showcase"></span>
+                <span class="punch"></span><span class="punch"></span><span class="punch"></span><span class="punch"></span><span class="punch"></span>
+              </span>
+              <span class="pc-foot"><span data-foot>Enough for a 5-punch reward</span></span>
+            </span>
+          </button>
+          <p class="visually-hidden" aria-live="polite" data-card-status>Sample punch card: 5 of 10 punches. Enough for a 5-punch reward.</p>
+          <script>
+            // The hero card plays the app's punch moment on load (one punch short, then the stamp lands,
+            // the total rolls up and the footer crossfades), then lets visitors stamp it themselves:
+            // any press on the card punches the next hole in order, up to a full card. Wording and timings
+            // follow the app (see site.css tokens).
+            (function () {
+              var button = document.currentScript.previousElementSibling.previousElementSibling;
+              var status = document.currentScript.previousElementSibling;
+              var holes = Array.prototype.slice.call(button.querySelectorAll('.punch'));
+              var count = button.querySelector('[data-count]');
+              var foot = button.querySelector('[data-foot]');
+              var tiers = [3, 5, 10, 15];
+              var css = getComputedStyle(document.documentElement);
+              var ms = function (name) { return parseFloat(css.getPropertyValue(name)); };
+              var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    <!-- Perks -->
-    <section class="restaurants">
-      <p class="section-label">Why join</p>
-      <h2 class="section-title">Built for busy counters</h2>
-      <div class="perks">
-        <div class="perk">
-          <div class="perk-note">YOUR MENU</div>
-          <h3>Your rewards, your menu</h3>
-          <p>Choose what you offer at each punch level, like a free coffee, a side, or money off a meal. Every spot prices rewards in the same punches.</p>
+              // Like the app: "Enough for…" when a punch has just reached a reward level; otherwise the next level.
+              function footerFor(n, justLanded) {
+                if (justLanded && tiers.indexOf(n) !== -1) return 'Enough for a ' + n + '-punch reward';
+                var next = tiers.filter(function (t) { return t > n; })[0];
+                return next ? (next - n) + ' more for a ' + next + '-punch reward' : 'Enough for any reward';
+              }
+              function rollTo(n) {
+                count.innerHTML = '<span class="roll"><span class="roll-out">' + (n - 1) +
+                  '</span><span class="roll-in">' + n + '</span></span>';
+              }
+              // The footer changes once the presses pause, so rapid taps show one change, not several.
+              var footTimer = null;
+              function settleFooter(n, wait) {
+                clearTimeout(footTimer);
+                footTimer = setTimeout(function () {
+                  var text = footerFor(n, true);
+                  if (foot.textContent === text) return;
+                  foot.style.opacity = '0';
+                  setTimeout(function () { foot.textContent = text; foot.style.opacity = '1'; }, ms('--dur-footer-crossfade') / 2);
+                }, wait);
+              }
+              function describe(n) {
+                return n >= holes.length ? 'Sample punch card is full: ' + n + ' punches. ' + footerFor(n, true) + '.'
+                                         : 'Sample punch card: ' + n + ' of ' + holes.length + ' punches. ' + footerFor(n, true) + '.';
+              }
+              // Until the visitor's first tap, the next hole keeps glowing so the card reads as tappable.
+              // After that it glows a few times: after each tap, and whenever the card is hovered or focused
+              // (only if it isn't already glowing, so nothing restarts mid-glow).
+              function invite() {
+                var next = button.querySelector('.punch.is-next');
+                if (!next || button.disabled) return;
+                if (next.classList.contains('is-inviting') && next.getAnimations && next.getAnimations().length) return;
+                next.classList.remove('is-inviting');
+                void next.offsetWidth;
+                next.classList.add('is-inviting');
+              }
+              function markNext(n) {
+                holes.forEach(function (h, i) {
+                  h.classList.toggle('is-next', i === n);
+                  h.classList.remove('is-inviting');
+                });
+                invite();
+              }
+              button.addEventListener('pointerenter', invite);
+              button.addEventListener('focus', invite);
+
+              var punches = Number(count.textContent);
+
+              // 1. The opening moment: start one short, then the stamp lands.
+              count.textContent = String(punches - 1);
+              foot.textContent = footerFor(punches - 1);
+              var impact = ms('--delay-stamp-showcase') +
+                (reduced ? ms('--dur-stamp-reduced') : ms('--dur-stamp-showcase') * ms('--stamp-impact'));
+              var settled = ms('--delay-stamp-showcase') + (reduced ? ms('--dur-stamp-reduced') : ms('--dur-stamp-showcase'));
+              setTimeout(function () { rollTo(punches); settleFooter(punches, 0); }, impact);
+
+              // 2. Then the card is the visitor's to stamp.
+              setTimeout(function () {
+                button.disabled = false;
+                markNext(punches);
+              }, settled);
+
+              button.classList.add('is-untapped');
+              button.addEventListener('click', function () {
+                button.classList.remove('is-untapped');
+                if (punches >= holes.length) return;
+                var hole = holes[punches];
+                punches += 1;
+                hole.classList.remove('is-showcase', 'is-new', 'is-tapped');
+                void hole.offsetWidth; // restart the stamp
+                hole.classList.add('is-filled', 'is-tapped');
+                setTimeout(function () { rollTo(punches); }, reduced ? 0 : ms('--dur-stamp') * 0.5);
+                settleFooter(punches, ms('--dur-footer-wait'));
+                markNext(punches);
+                status.textContent = describe(punches);
+                if (punches >= holes.length) {
+                  button.disabled = true;
+                  button.setAttribute('aria-label', 'The sample punch card is full');
+                }
+              });
+            })();
+          </script>
         </div>
-        <div class="perk">
-          <div class="perk-note">AT THE COUNTER</div>
-          <h3>Nothing to install</h3>
-          <p>A small tag at the register is all it takes. No new hardware, no POS integration, nothing for your staff to learn beyond offering the tag.</p>
         </div>
-        <div class="perk">
-          <div class="perk-note">YOUR REGULARS</div>
-          <h3>Know your regulars</h3>
-          <p>Get a monthly summary of punches, redemptions, and the new diners who found you through other Nibblr spots.</p>
+      </section>
+
+      <section class="section how" aria-labelledby="counter-title">
+        <div class="wrap">
+          <div class="how-grid">
+            <div class="how-copy">
+              <h2 class="t-h2" id="counter-title">Nothing changes at your register.</h2>
+              <ol class="steps">
+                <li class="step">
+                  <h3 class="t-menu">They pay as usual</h3>
+                  <p>Cash, card, anything. Nibblr doesn’t touch your register, your POS or your payments.</p>
+                </li>
+                <li class="step">
+                  <h3 class="t-menu">They tap the tag</h3>
+                  <p>On orders of $10 or more, the diner taps the Nibblr tag by your register with their phone. That’s a punch.</p>
+                </li>
+                <li class="step">
+                  <h3 class="t-menu">Rewards go on the comp button</h3>
+                  <p>Using a reward, the diner shows your cashier a screen like this one. Your cashier applies it with your comp button. The same tap earns a punch.</p>
+                </li>
+              </ol>
+            </div>
+            <figure class="screen-figure">
+              <picture class="screen-slot">
+                <img src="images/screen-reward.webp" width="390" height="844" alt="Sample Nibblr reward screen: Cedar &amp; Saffron, Baklava, 3 punches, with 9:57 left to use it and the line “Cashier: apply it with your comp button.”" loading="lazy" decoding="async" />
+              </picture>
+              <figcaption class="t-fine">Sample screen.</figcaption>
+            </figure>
+          </div>
         </div>
-        <div class="perk">
-          <div class="perk-note">THE NETWORK</div>
-          <h3>Grow with the network</h3>
-          <p>Diners collecting punches nearby discover you, and early partners help shape the network as it expands across the city.</p>
+      </section>
+
+      <section class="section" aria-labelledby="network-title">
+        <div class="wrap rewards">
+          <div class="section-head">
+            <h2 class="t-h2" id="network-title">Customers from other spots.</h2>
+            <p class="t-lead">Diners can spend punches earned anywhere in the neighborhood at your counter, sometimes on their first visit. Require a purchase with any reward, and it always comes with an order.</p>
+          </div>
+          <div class="ticket-wrap">
+            <figure class="receipt-object ticket" aria-label="Sample register ticket at Cedar and Saffron: a first-time diner orders a shawarma plate and lentil soup, and a baklava reward is comped. Total 22 dollars 50. It is the diner’s first visit, using punches earned at Sakura Den and Brick and Stone Pizza.">
+              <div class="receipt">
+                <div class="receipt-head"><span class="ticket-name">Cedar &amp; Saffron</span><span class="ticket-meta">Sat 12:41</span></div>
+                <table class="receipt-lines"><tbody>
+                  <tr><td class="item">Shawarma plate</td><td class="amt num">$16.00</td></tr>
+                  <tr><td class="item">Lentil soup</td><td class="amt num">$6.50</td></tr>
+                  <tr><td class="item">Baklava</td><td class="amt num">$4.00</td></tr>
+                  <tr class="is-reward"><td class="item">Comp: Nibblr reward<small>3 punches, with an order of $15 or more</small></td><td class="amt num">−$4.00</td></tr>
+                </tbody></table>
+                <p class="receipt-total"><span>Total</span><span class="num">$22.50</span></p>
+                <p class="receipt-foot">Sample ticket.</p>
+              </div>
+            </figure>
+            <p class="ticket-annot">A first-time customer, spending punches earned at Sakura Den and Brick &amp; Stone Pizza.</p>
+          </div>
         </div>
+      </section>
+
+      <section class="section" aria-labelledby="menu-title">
+        <div class="wrap rewards rewards-flip">
+          <div class="section-head">
+            <h2 class="t-h2" id="menu-title">Your rewards, your rules.</h2>
+            <p class="t-lead">Offer as many or as few rewards as you like, at 3, 5, 10 or 15 punches, and add deals for your slow hours. Cover their cost, and change them anytime.</p>
+          </div>
+          <div class="menu owner-menu">
+            <p class="menu-title t-h4">Cedar &amp; Saffron <span class="muted">(sample)</span></p>
+            <ul class="menu-list">
+              <li class="menu-row t-menu"><span>Baklava<small class="menu-cond">with an order of $15 or more</small></span><span class="leader"></span><span class="price num">3</span></li>
+              <li class="menu-row t-menu"><span>Hummus and pita<small class="menu-cond">3 on weekdays, 2 to 4pm</small></span><span class="leader"></span><span class="price num">5</span></li>
+              <li class="menu-row t-menu"><span>$10 off a meal</span><span class="leader"></span><span class="price num">10</span></li>
+              <li class="menu-row t-menu"><span>Shawarma plate</span><span class="leader"></span><span class="price num">15</span></li>
+            </ul>
+            <p class="menu-note">Prices in punches.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="faq-title">
+        <div class="wrap">
+          <div class="section-head">
+            <h2 class="t-h2" id="faq-title">Questions owners ask</h2>
+          </div>
+          <dl class="faq">
+            <div><dt class="t-menu">What does it cost?</dt><dd>Nothing during the 12-week pilot, and we never ask for payment details. After it, we’ll only talk about pricing if we can show Nibblr brought you more business, and it’s your call whether to continue.</dd></div>
+            <div><dt class="t-menu">Do my customers need an app?</dt><dd>Not to start earning. One tap on the tag with their phone gives them a punch. They’ll need the app to spend punches on a reward.</dd></div>
+            <div><dt class="t-menu">I tried a loyalty app before. It wasn’t worth it.</dt><dd>Nibblr doesn’t hook into your register, and no payments go through us: diners pay you the usual way and never pre-load money. And it’s shared, so it brings you diners who earn at spots nearby, not just your own regulars. If the pilot doesn’t bring you more business, you walk away owing nothing.</dd></div>
+            <div><dt class="t-menu">I already have a loyalty program.</dt><dd>Keep it. Nibblr runs alongside your own punch card or Square Loyalty, and doesn’t touch your register.</dd></div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="band contact-band" aria-labelledby="contact-title">
+        <div class="wrap band-inner">
+          <div class="band-copy">
+            <h2 class="t-h2" id="contact-title">Join the free pilot.</h2>
+            <ul class="pilot-terms">
+              <li><span class="num">12 weeks</span>Starting January 2027.</li>
+              <li><span class="num">Together</span>Nibblr launches with a group of nearby independent spots, all at once. We’re in talks with spots across the East Village now.</li>
+              <li><span class="num">1 page</span>A non-binding letter of intent, sent for you to read first. Leave anytime.</li>
+              <li><span class="num">You get</span>A Nibblr tag, in-store signage, and an owner portal that shows your punches, rewards and new diners from other spots.</li>
+            </ul>
+          </div>
+
+          <div class="lead" id="contact">
+            <!-- Posts to Formspark as JSON. A ?ref= tag (e.g. ?ref=flyer from a QR code) records where the visitor came from. -->
+            <form class="lead-form" id="lead-form" action="https://submit-form.com/tEAr5UWM4" method="POST" novalidate>
+              <p class="lead-intro">You’ll hear from Eli, Lee or Zak. We live in the East Village, and we’ll call at a time that suits you.</p>
+              <div class="field">
+                <label class="label" for="lead-name">Your name</label>
+                <input class="input" id="lead-name" data-missing="Please add your name." name="name" type="text" autocomplete="name" maxlength="100" required />
+              </div>
+              <div class="field">
+                <label class="label" for="lead-restaurant">Restaurant</label>
+                <input class="input" id="lead-restaurant" data-missing="Please add your restaurant’s name." name="restaurant" type="text" autocomplete="organization" maxlength="120" required />
+              </div>
+              <div class="field">
+                <label class="label" for="lead-contact">Phone or email</label>
+                <input class="input" id="lead-contact" data-missing="Please add a phone number or email so we can reach you." name="contact" type="text" autocomplete="off" maxlength="120" required data-reach />
+              </div>
+              <div class="field">
+                <label class="label" for="lead-time">Best time to reach you <span class="optional">(optional)</span></label>
+                <input class="input" id="lead-time" name="best_time" type="text" maxlength="120" placeholder="e.g. weekdays after 3" />
+              </div>
+              <!-- Spam honeypot: hidden from people, filled in by bots -->
+              <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
+              <button class="btn btn-primary" type="submit">Ask for a call</button>
+              <p class="error-msg form-error" id="lead-error" role="alert" hidden><svg aria-hidden="true"><use href="#i-alert"/></svg><span></span></p>
+              <p class="t-small lead-email">Prefer email? <a href="mailto:hello@joinnibblr.com?subject=Joining%20Nibblr">hello@joinnibblr.com</a></p>
+            </form>
+            <div class="notice lead-done" id="lead-done" role="status" tabindex="-1" hidden>
+              <span class="tick"><svg aria-hidden="true"><use href="#i-check"/></svg></span>
+              <div><p class="t-h4">Thanks, we’ll be in touch soon.</p><p class="t-small muted">Questions in the meantime? Email <a href="mailto:hello@joinnibblr.com">hello@joinnibblr.com</a>.</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-foot">
+      <div class="wrap">
+        <a href="/">Nibblr for diners</a>
+        <a href="privacy.html">Privacy</a>
+        <span>© 2026 Nibblr</span>
       </div>
-    </section>
-
-    <!-- At the counter -->
-    <section class="how">
-      <p class="section-label">At your counter</p>
-      <h2 class="section-title">Three seconds per visit</h2>
-      <div class="steps">
-        <div class="step">
-          <div class="step-number" aria-hidden="true">01</div>
-          <h3>They pay as usual</h3>
-          <p>Cash, card, anything. Nibblr doesn't touch your register or your payments.</p>
-        </div>
-        <div class="step">
-          <div class="step-number" aria-hidden="true">02</div>
-          <h3>They tap your tag</h3>
-          <p>On orders of $10 or more, your cashier offers the Nibblr tag and the diner taps it with their phone. That's a punch.</p>
-        </div>
-        <div class="step">
-          <div class="step-number" aria-hidden="true">03</div>
-          <h3>Using a reward? Tap first</h3>
-          <p>The diner taps before paying and shows your cashier the reward, like "Free baklava." The same tap earns a punch.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact: a short form so owners can ask for a call without email.
-         Posts to Formspark as JSON. The ref tag (e.g. ?ref=flyer from the
-         leave-behind QR code) records where the visitor came from. -->
-    <section class="contact" id="contact">
-      <p class="section-label">Join the first group</p>
-      <h2>Own a restaurant? Let's talk.</h2>
-      <p>We're choosing the first group of East Village restaurants now. Leave your details and we'll come by or call at a time that suits you.</p>
-
-      <ul class="pilot-terms">
-        <li><strong>Free for the 12-week pilot.</strong> No fee unless you continue.</li>
-        <li><strong>You pick the rewards</strong> and cover their food cost.</li>
-        <li><strong>No app needed</strong> for your customers to start earning.</li>
-        <li><strong>No contract.</strong> Leave anytime.</li>
-      </ul>
-
-      <form class="lead-form" id="lead-form" action="https://submit-form.com/tEAr5UWM4" method="POST">
-        <div class="field">
-          <label for="lead-name">Your name</label>
-          <input id="lead-name" name="name" type="text" autocomplete="name" maxlength="100" required />
-        </div>
-        <div class="field">
-          <label for="lead-restaurant">Restaurant</label>
-          <input id="lead-restaurant" name="restaurant" type="text" autocomplete="organization" maxlength="120" required />
-        </div>
-        <div class="field">
-          <label for="lead-contact">Phone or email</label>
-          <input id="lead-contact" name="contact" type="text" autocomplete="tel" maxlength="120" required />
-        </div>
-        <div class="field">
-          <label for="lead-time">Best time to reach you <span class="optional">(optional)</span></label>
-          <input id="lead-time" name="best_time" type="text" maxlength="120" placeholder="e.g. weekdays after 3" />
-        </div>
-        <!-- Spam honeypot: hidden from people, filled in by bots -->
-        <input type="checkbox" name="_honeypot" style="display:none" tabindex="-1" autocomplete="off" />
-        <button class="btn-primary" type="submit">Ask for a call</button>
-        <p class="form-error" role="alert" hidden></p>
-      </form>
-
-      <div class="lead-done" id="lead-done" hidden>
-        <div class="check" aria-hidden="true">✓</div>
-        <h3>Thanks, we'll be in touch soon.</h3>
-      </div>
-
-      <p class="email-address">Prefer email? Write to <a href="mailto:hello@joinnibblr.com?subject=Joining%20Nibblr">hello@joinnibblr.com</a></p>
-    </section>
-
-    <footer>
-      <a href="/">Nibblr for diners</a>
-      · <a href="privacy.html">Privacy</a>
-      · &copy; 2026 Nibblr
     </footer>
 
     <script>
       (function () {
         var form = document.getElementById('lead-form');
         var done = document.getElementById('lead-done');
+        var button = form.querySelector('button[type=submit]');
+        var error = form.querySelector('.form-error');
+        var errorText = error.querySelector('span');
+        var label = button.textContent;
         var ref = (new URLSearchParams(location.search).get('ref') || '')
           .toLowerCase().replace(/[^a-z0-9-]/g, '').slice(0, 40);
 
+        function showError(message) {
+          errorText.textContent = message;
+          error.hidden = false;
+        }
+        form.addEventListener('input', function (event) {
+          event.target.removeAttribute('aria-invalid');
+          event.target.removeAttribute('aria-describedby');
+          error.hidden = true;
+        });
+
         form.addEventListener('submit', function (event) {
           event.preventDefault();
-          if (!form.reportValidity()) return;
-          var button = form.querySelector('button[type=submit]');
-          var error = form.querySelector('.form-error');
+          form.querySelectorAll('[aria-invalid]').forEach(function (f) { f.removeAttribute('aria-invalid'); });
+          var missing = form.querySelector('.input:invalid');
+          var reach = form.querySelector('[data-reach]');
+          var v = reach.value.trim();
+          var reachable = /\S+@\S+\.\S+/.test(v) || v.replace(/\D/g, '').length >= 7;
+          if (!missing && !reachable) { missing = reach; missing.dataset.missing = 'Add a phone number or email we can reach you at.'; }
+          if (missing) {
+            missing.setAttribute('aria-invalid', 'true');
+            missing.setAttribute('aria-describedby', error.id);
+            missing.closest('.field').appendChild(error); // the message sits right under the field
+            showError(missing.dataset.missing);
+            missing.focus();
+            return;
+          }
+          form.querySelector('.lead-email').before(error);
           var data = {
             name: form.elements.name.value.trim(),
             restaurant: form.elements.restaurant.value.trim(),
@@ -161,6 +352,7 @@
           };
           if (form.elements._honeypot.checked) data._honeypot = 'on';
           button.disabled = true;
+          button.setAttribute('aria-busy', 'true');
           button.textContent = 'Sending…';
           error.hidden = true;
           fetch(form.action, {
@@ -172,14 +364,36 @@
               if (!response.ok) throw new Error('HTTP ' + response.status);
               form.hidden = true;
               done.hidden = false;
+              done.focus();
             })
             .catch(function () {
-              error.textContent = "That didn't go through. Please try again, or email hello@joinnibblr.com.";
-              error.hidden = false;
+              showError("That didn't go through. Please try again, or email hello@joinnibblr.com.");
               button.disabled = false;
-              button.textContent = 'Ask for a call';
-            });
+              button.textContent = label;
+            })
+            .finally(function () { button.removeAttribute('aria-busy'); });
         });
+      })();
+    </script>
+
+    <script>
+      // The receipt prints once as it scrolls into view (see .is-printing in site.css).
+      (function () {
+        var receipt = document.querySelector('.receipt-object');
+        if (!receipt || !('IntersectionObserver' in window)) return;
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var parts = [receipt.querySelector('.receipt-head')]
+          .concat(Array.prototype.slice.call(receipt.querySelectorAll('.receipt-lines tr')))
+          .concat([receipt.querySelector('.receipt-total'), receipt.querySelector('.receipt-foot')]);
+        var gap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--gap-receipt-line'));
+        receipt.style.setProperty('--receipt-print-time', (parts.length * gap) + 'ms');
+        receipt.classList.add('is-ready');
+        var seen = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          receipt.classList.add('is-printing');
+          seen.disconnect();
+        }, { threshold: 0.45 });
+        seen.observe(receipt);
       })();
     </script>
 

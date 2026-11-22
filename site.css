@@ -650,6 +650,70 @@ a { color: inherit; }
   .band-card .pc-count b { font-size: var(--text-num-sm); }
 }
 
+/* ==========================================================================
+   RESTAURANTS PAGE: same parts, aimed at owners
+   ========================================================================== */
+/* The pilot's three promises, set like a printed strip between double rules */
+.pilot-strip { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-4); margin-top: var(--space-3); max-width: var(--measure-narrow); font-size: var(--text-small); font-weight: 700; } /* the reassurance line under the button, like the fine print under the diner form */
+.pilot-strip li { display: inline-flex; align-items: center; gap: var(--space-2); }
+.pilot-strip li + li::before { content: ""; width: 0.3em; height: 0.3em; border-radius: var(--radius-full); background: currentColor; }
+.hero-actions { margin-top: var(--space-6); display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); }
+.hero-actions a:not(.btn) { color: inherit; text-underline-offset: var(--underline-offset); }
+/* The rewards section sits opposite the receipt: menu on the left, words on the right */
+.rewards-flip .section-head { order: 2; }
+.owner-menu { width: 100%; max-width: 28rem; justify-self: center; }
+.menu-cond { display: block; font-size: var(--text-small); font-weight: 600; font-stretch: var(--stretch-normal); color: var(--color-text-muted); }
+/* The restaurant's own register ticket: the receipt component in the owner's paper (prices, a comp line) */
+.ticket .receipt-head { gap: var(--space-1); }
+.ticket-name { font-size: var(--text-h4); font-weight: 800; font-stretch: var(--stretch-semi); text-transform: uppercase; }
+.ticket-meta { font-size: var(--text-fine); color: var(--color-text-muted); }
+.ticket .receipt-lines .item { font-stretch: var(--stretch-normal); text-transform: none; font-weight: 600; }
+.ticket .receipt-lines .amt { font-size: var(--text-body); font-weight: 700; font-stretch: var(--stretch-normal); }
+.ticket-wrap { width: 100%; max-width: var(--receipt-max); justify-self: center; }
+.ticket-annot { margin: var(--space-6) auto 0; font-size: var(--text-small); color: var(--color-text-muted); text-align: center; text-wrap: balance; } /* a note about the ticket, outside the paper: the register only prints the order */
+/* Questions: a ledger, one question per row, read top to bottom in order of importance (like the pilot terms) */
+.faq { display: grid; max-width: 60rem; border-bottom: var(--rule-soft); }
+.faq > div { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--space-3) var(--space-8); align-items: baseline; padding-block: var(--space-5); border-top: var(--rule-soft); }
+.faq dd { margin: 0; color: var(--color-text-muted); max-width: 36rem; text-wrap: pretty; }
+/* Contact band: the pilot terms beside the form */
+.pilot-terms { list-style: none; display: grid; gap: var(--space-4); max-width: 34rem; color: var(--color-on-band-muted); }
+.pilot-terms li { display: grid; grid-template-columns: 6.5rem 1fr; gap: var(--space-4); align-items: baseline; padding-top: var(--space-4); border-top: 1px dashed var(--color-on-band-muted); }
+.pilot-terms .num { font-weight: 800; font-stretch: var(--stretch-condensed); font-size: var(--text-h4); color: var(--color-on-band); }
+.lead { width: 100%; }
+.lead-form { display: grid; gap: var(--space-4); padding: var(--space-6); background: var(--color-surface); color: var(--color-text); }
+.lead-form .label { color: var(--color-text); }
+.lead-form .input { border-color: var(--color-rule); }
+.lead-form .btn { justify-self: stretch; }
+.band .lead-form .btn-primary { background: var(--color-action); color: var(--color-on-action); border-color: var(--color-action); } /* the form is a light panel: the ink button again */
+.band .lead-form .btn-primary:hover:not(:disabled) { background: var(--color-action-hover); border-color: var(--color-action-hover); }
+.lead-intro { font-weight: 600; } /* opens the form: who will call */
+.lead-email { color: var(--color-text-muted); }
+.lead-email a { color: inherit; text-underline-offset: var(--underline-offset); }
+.band .lead-form .error-msg { color: var(--color-danger); }
+.lead-done:focus { outline: none; }
+.lead { scroll-margin-top: var(--space-5); }
+.lead-form .field .error-msg { margin-top: var(--space-1); }
+.input[aria-invalid="true"]:focus { border-color: var(--color-danger); }
+/* Inline email links: a comfortable tap height without changing the line */
+.hero-actions a:not(.btn), .lead-email a, .lead-done a { display: inline-block; padding-block: 0.6rem; margin-block: -0.6rem; }
+.lead-done a { color: inherit; text-underline-offset: var(--underline-offset); }
+@media (max-width: 56rem) {
+  .rewards-flip .section-head { order: 0; }
+  /* Contact band on phones: heading, then the form, then the terms as reassurance below it */
+  .contact-band .band-inner { gap: var(--space-6); }
+  .contact-band .band-copy { display: contents; }
+  .contact-band .band-copy .t-h2 { order: 0; }
+  .contact-band .lead { order: 1; }
+  .contact-band .pilot-terms { order: 2; }
+  .faq > div { grid-template-columns: 1fr; gap: var(--space-2); }
+}
+@media (max-width: 30rem) {
+  .pilot-strip { gap: var(--space-1) var(--space-3); margin-top: var(--space-4); font-size: var(--text-small); } /* one wrapped line, so the button stays in the first screen */
+  .pilot-strip li::before { content: ""; width: 0.3em; height: 0.3em; border-radius: var(--radius-full); background: currentColor; } /* every item gets a dot, so a wrapped line still reads as a list */
+  .lead-form { padding: var(--space-5); }
+  .pilot-terms li { grid-template-columns: 1fr; gap: var(--space-1); }
+}
+
 /* Footer */
 .site-foot { padding-block: var(--space-6); font-size: var(--text-small); color: var(--color-text-muted); }
 .site-foot .wrap { display: flex; flex-wrap: wrap; gap: var(--space-2) var(--space-5); }
