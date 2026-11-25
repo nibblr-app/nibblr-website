@@ -589,6 +589,9 @@ a { color: inherit; }
    ========================================================================== */
 .wrap { width: min(100% - 2 * var(--gutter), var(--page-max)); margin-inline: auto; }
 .site-nav .link { font-size: var(--text-small); }
+/* Restaurants page: the audience sits beside the wordmark as a lockup, never above the headline */
+.nav-brand { display: inline-flex; align-items: baseline; gap: 0.45em; }
+.nav-where { font-size: var(--text-small); font-weight: 600; color: var(--color-text-muted); white-space: nowrap; }
 
 .section { padding-block: var(--space-section); border-top: var(--rule-double); }
 .section-head { display: grid; gap: var(--space-4); max-width: 40rem; margin-bottom: var(--space-7); }
