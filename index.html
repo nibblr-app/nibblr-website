@@ -143,7 +143,7 @@
               var holes = Array.prototype.slice.call(button.querySelectorAll('.punch'));
               var count = button.querySelector('[data-count]');
               var foot = button.querySelector('[data-foot]');
-              var tiers = [3, 5, 10, 15];
+              var tiers = [3, 5, 7, 10];
               var css = getComputedStyle(document.documentElement);
               var ms = function (name) { return parseFloat(css.getPropertyValue(name)); };
               var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -263,7 +263,7 @@
         <div class="wrap rewards">
           <div class="section-head">
             <h2 class="t-h2" id="rewards-title">What punches buy</h2>
-            <p class="t-lead">Every spot prices its rewards at 3, 5, 10 or 15 punches, like baklava for 3 or a shawarma plate for 15. Punches from anywhere work everywhere.</p>
+            <p class="t-lead">Every spot prices its rewards at 3, 5, 7 or 10 punches, like baklava for 3 or $10 off a meal for 10. Punches from anywhere work everywhere.</p>
           </div>
           <figure class="receipt-object" aria-label="Sample receipt: one diner’s week, four punches earned at three spots, three spent on baklava, balance 1 punch">
             <div class="receipt">

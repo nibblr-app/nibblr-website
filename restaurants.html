@@ -76,7 +76,7 @@
               var holes = Array.prototype.slice.call(button.querySelectorAll('.punch'));
               var count = button.querySelector('[data-count]');
               var foot = button.querySelector('[data-foot]');
-              var tiers = [3, 5, 10, 15];
+              var tiers = [3, 5, 7, 10];
               var css = getComputedStyle(document.documentElement);
               var ms = function (name) { return parseFloat(css.getPropertyValue(name)); };
               var reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -225,15 +225,15 @@
         <div class="wrap rewards rewards-flip">
           <div class="section-head">
             <h2 class="t-h2" id="menu-title">Your rewards, your rules.</h2>
-            <p class="t-lead">Offer as many or as few rewards as you like, at 3, 5, 10 or 15 punches, and add deals for your slow hours. Cover their cost, and change them anytime.</p>
+            <p class="t-lead">Offer as many or as few rewards as you like, at 3, 5, 7 or 10 punches, and add deals for your slow hours. Cover their cost, and change them anytime.</p>
           </div>
           <div class="menu owner-menu">
             <p class="menu-title t-h4">Cedar &amp; Saffron <span class="muted">(sample)</span></p>
             <ul class="menu-list">
               <li class="menu-row t-menu"><span>Baklava<small class="menu-cond">with an order of $15 or more</small></span><span class="leader"></span><span class="price num">3</span></li>
               <li class="menu-row t-menu"><span>Hummus and pita<small class="menu-cond">3 on weekdays, 2 to 4pm</small></span><span class="leader"></span><span class="price num">5</span></li>
+              <li class="menu-row t-menu"><span>Shawarma plate</span><span class="leader"></span><span class="price num">7</span></li>
               <li class="menu-row t-menu"><span>$10 off a meal</span><span class="leader"></span><span class="price num">10</span></li>
-              <li class="menu-row t-menu"><span>Shawarma plate</span><span class="leader"></span><span class="price num">15</span></li>
             </ul>
             <p class="menu-note">Prices in punches.</p>
           </div>
